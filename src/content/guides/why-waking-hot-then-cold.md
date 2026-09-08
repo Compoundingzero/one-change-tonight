@@ -1,29 +1,29 @@
 ---
 path: /why/waking-hot-then-cold/
-title: Why Do I Wake Up Hot and Then Feel Freezing?
-description: Sweating and a rapid change in felt heat can be followed by chills. Treat a dry-layer test as a comfort hypothesis, not an explanation of cause.
-eyebrow: Hot, then cold
-audience: This page is for someone who throws off the covers while hot and then feels chilled, clammy, or shivery.
-directAnswer: A sudden heat episode may include sweating and can be followed by chills. Sweat evaporation removes heat, so damp skin or fabric is one plausible comfort factor to observe after the heat eases. The site has not established that changing a damp item shortens recovery, and the sequence does not reveal why the episode occurred.
-uncertainty: Feeling cold afterwards may relate to evaporation, a cooler room, or the episode itself. The dry-layer step is an editorial experiment, not a proven treatment or health outcome.
+title: Why You Wake Hot and Then Feel Freezing
+description: Sweating may be followed by chills. A dry replacement can test comfort after waking, but it cannot explain what caused the heat.
+eyebrow: Separate the hot part from the cold part
+audience: You uncover while hot, then feel cold, clammy, or shivery.
+directAnswer: Sudden heat can include sweating and may be followed by chills. Evaporation removes heat, so damp skin or fabric may add to discomfort after the strongest heat passes. This site has not shown that changing a damp item shortens that cold period, and the hot-then-cold sequence does not explain why the heat began.
+uncertainty: The cold feeling may come from evaporation, the cooler room, or the same event that caused the heat. A dry-layer check is unproven and concerns comfort only.
 applies:
-  - Heat arrives quickly rather than building over hours.
-  - You wake damp and become cold after uncovering.
-  - A partner or the room remains comfortable.
+  - Heat arrives quickly instead of building over several hours.
+  - You wake damp and feel cold after uncovering.
+  - The room or another sleeper remains comfortable.
 mayNotApply:
-  - You remain steadily hot and the entire bedroom is warm.
+  - You remain steadily hot and the whole bedroom is warm.
 observations:
-  - The first sensation was a sudden wave of heat.
-  - Dampness remained after the strongest heat passed.
-  - Cold followed quickly when covers were removed.
-experimentName: Shorten the damp recovery period
-experimentChange: Change one damp item for a dry equivalent after waking.
-experimentConstant: Keep room temperature and all other bedding layers unchanged.
+  - Whether the first feeling was a sudden rush of heat.
+  - Which clothing or bedding became damp.
+  - How soon cold or shivering followed when the heat eased.
+experimentName: Change one damp item for a dry one
+experimentChange: After waking damp, replace one damp sleepwear item or light layer with a dry equivalent.
+experimentConstant: Leave the room temperature and every other bed layer unchanged.
 experimentSteps:
-  - Prepare one dry equivalent before bed so the change takes little effort.
-  - Record whether the cold-afterwards period and time to comfort change.
-doNotBuy: Do not add stronger whole-room cooling first when the difficult part may be the switch from heat to damp cold.
-safetyNote: A hot-then-cold sequence can occur for different reasons. Frequent, soaking, new, worsening, or worrying episodes should be discussed with a qualified healthcare professional.
+  - Put one dry equivalent within reach before sleep.
+  - Record whether the cold period and time back to comfort differ, without assuming they will.
+doNotBuy: Start with one dry item already at home instead of adding stronger room cooling when the difficult part is the switch from heat to damp cold.
+safetyNote: Hot-then-cold episodes can have different causes. Frequent, soaking, new, worsening, or worrying episodes should be discussed with a qualified healthcare professional.
 sourceIds:
   [
     MENOPAUSE-SOCIETY-HOT-FLASHES-2026,
@@ -33,11 +33,11 @@ sourceIds:
     OCT-METHOD-2026,
   ]
 broaderLink:
-  { label: See the sudden personal-heat pattern, href: /patterns/sudden-personal-heat/ }
+  { label: See how the site handles sudden heat, href: /patterns/sudden-personal-heat/ }
 nextLink:
-  { label: Is moisture extending the discomfort?, href: /patterns/moisture-and-recovery/ }
+  { label: Read about dampness and the cold period, href: /patterns/moisture-and-recovery/ }
 context: hot-then-cold
 published: '2026-09-07'
-reviewed: '2026-09-07'
+reviewed: '2026-09-08'
 indexable: true
 ---

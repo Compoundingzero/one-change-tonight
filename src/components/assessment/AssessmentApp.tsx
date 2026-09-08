@@ -12,6 +12,7 @@ import {
   loadLocalState,
   saveLocalState,
   type LocalAppStateV1,
+  type MorningCheckIn,
   type MorningCheckInDraft,
 } from '@/lib/storage';
 import './assessment.css';
@@ -34,17 +35,15 @@ const genericContexts = new Set([
 ]);
 
 const contextCopy: Record<string, string> = {
-  'partner-temperature':
-    'We’ll keep both sleepers in view and look for a one-sided first step.',
+  'partner-temperature': 'We’ll look for a first step that keeps both sleepers comfortable.',
   'cold-room':
-    'A cool room can be only one part of the night. We’ll check the bed, timing, moisture, and partner too.',
-  'hot-then-cold': 'We’ll separate the first heat from what happened after it eased.',
-  'bed-heat': 'We’ll check whether warmth built around the bed before changing the whole room.',
-  'failed-fix': 'A failed fix is useful evidence. We’ll avoid simply repeating it.',
-  mechanisms:
-    'We’ll identify the environmental constraint before comparing more involved mechanisms.',
+    'A cool room is only one part of the night. We’ll also ask about the bed, timing, dampness, and your partner.',
+  'hot-then-cold': 'We’ll ask what happened while you were hot and after the heat eased.',
+  'bed-heat': 'We’ll check whether warmth built around the bed before making the room colder.',
+  'failed-fix': 'Tell us what you already tried so we don’t simply suggest it again.',
+  mechanisms: 'We’ll first work out whether to change the room, bed, or one side.',
   'care-notes':
-    'You can produce a short factual summary without turning observations into a diagnosis.',
+    'We’ll make a short note you can bring to an appointment. It describes what happened; it does not suggest a cause.',
 };
 
 function replaceAnswer(
@@ -85,7 +84,7 @@ const morningOptions = {
     ['soaked', 'Soaked'],
   ],
   becameColdAfterwards: [
-    [CHECK_IN_NOT_RECORDED, 'Select cold afterwards'],
+    [CHECK_IN_NOT_RECORDED, 'Select cold afterward'],
     ['no', 'No'],
     ['slightly', 'Slightly'],
     ['strongly', 'Strongly'],
@@ -112,7 +111,7 @@ const morningOptions = {
     ['clearly', 'Clearly'],
   ],
   continueExperiment: [
-    [CHECK_IN_NOT_RECORDED, 'Select whether to continue'],
+    [CHECK_IN_NOT_RECORDED, 'Select whether to try it again'],
     ['yes', 'Yes'],
     ['no', 'No'],
     ['unsure', 'Unsure'],
@@ -121,12 +120,12 @@ const morningOptions = {
 
 const morningLabels: Record<keyof Omit<MorningCheckInDraft, 'night' | 'date'>, string> = {
   heatRelatedAwakenings: 'Heat-related awakenings',
-  moisture: 'Moisture',
-  becameColdAfterwards: 'Became cold afterwards',
-  timeToComfort: 'Time to comfort',
-  partnerDisturbed: 'Partner disturbed',
-  experimentHelp: 'Did the experiment help?',
-  continueExperiment: 'Continue the same experiment?',
+  moisture: 'How damp were you?',
+  becameColdAfterwards: 'Did you become cold afterward?',
+  timeToComfort: 'Time until comfortable again',
+  partnerDisturbed: 'Was your partner disturbed?',
+  experimentHelp: 'Did the change help?',
+  continueExperiment: 'Try the same change again?',
 };
 
 function canonicalizeAnswers(answers: AssessmentAnswers): AssessmentAnswers {
@@ -143,11 +142,89 @@ function canonicalizeAnswers(answers: AssessmentAnswers): AssessmentAnswers {
 }
 
 const premiumLabels = {
-  premium_active_cooling_not_yet_justified: 'Not justified yet',
-  active_one_sided_system_may_be_worth_comparing: 'Worth comparing only after lower-cost tests',
+  premium_active_cooling_not_yet_justified: 'Not yet',
+  active_one_sided_system_may_be_worth_comparing: 'Maybe, after simpler tests',
   personal_or_dual_zone_active_system_fits_environmental_constraint:
-    'Fits the stated constraint and accepted tradeoffs',
+    'Worth comparing if the trade-offs work for you',
 } as const;
+
+const clarityLabels = {
+  clear_pattern: 'Clear starting point',
+  mixed_pattern: 'Mixed answers',
+  not_enough_information: 'Not enough information',
+} as const;
+
+const frequencyDisplayLabels = {
+  less_than_weekly: 'Less than once a week',
+  one_or_two_nights: 'One or two nights a week',
+  three_or_four_nights: 'Three or four nights a week',
+  five_or_more_nights: 'Five or more nights a week',
+  not_sure: 'Not sure',
+} as const;
+
+const changeStatusDisplayLabels = {
+  yes: 'Yes',
+  no: 'No',
+  not_sure: 'Not sure',
+  prefer_not_to_answer: 'Preferred not to answer',
+} as const;
+
+const morningDisplayLabels = {
+  heatRelatedAwakenings: {
+    '0': '0',
+    '1': '1',
+    '2': '2',
+    '3_plus': '3 or more',
+  },
+  moisture: {
+    dry: 'Woke dry',
+    damp: 'Woke damp',
+    soaked: 'Woke soaked',
+  },
+  becameColdAfterwards: {
+    no: 'Did not become cold afterward',
+    slightly: 'Became slightly cold afterward',
+    strongly: 'Became very cold afterward',
+  },
+  timeToComfort: {
+    under_10_minutes: 'Comfort returned in under 10 minutes',
+    '10_to_30_minutes': 'Comfort returned in 10–30 minutes',
+    '30_to_60_minutes': 'Comfort returned in 30–60 minutes',
+    over_60_minutes: 'Comfort returned after more than 60 minutes',
+    unknown: 'Time until comfort was not known',
+  },
+  partnerDisturbed: {
+    yes: 'Partner was disturbed',
+    no: 'Partner was not disturbed',
+    not_applicable: 'Partner disturbance did not apply',
+  },
+  experimentHelp: {
+    no: 'The change did not help',
+    unsure: 'Not sure whether the change helped',
+    somewhat: 'The change helped somewhat',
+    clearly: 'The change clearly helped',
+  },
+  continueExperiment: {
+    yes: 'Plan to continue the same change',
+    no: 'Do not plan to continue the same change',
+    unsure: 'Not sure whether to continue the same change',
+  },
+} as const;
+
+function formatMorningCheckIn(entry: MorningCheckIn): string {
+  const awakenings = morningDisplayLabels.heatRelatedAwakenings[entry.heatRelatedAwakenings];
+  const awakeningLabel = entry.heatRelatedAwakenings === '1' ? 'awakening' : 'awakenings';
+
+  return [
+    `${awakenings} heat-related ${awakeningLabel}`,
+    morningDisplayLabels.moisture[entry.moisture],
+    morningDisplayLabels.becameColdAfterwards[entry.becameColdAfterwards],
+    morningDisplayLabels.timeToComfort[entry.timeToComfort],
+    morningDisplayLabels.partnerDisturbed[entry.partnerDisturbed],
+    morningDisplayLabels.experimentHelp[entry.experimentHelp],
+    morningDisplayLabels.continueExperiment[entry.continueExperiment],
+  ].join('. ');
+}
 
 export default function AssessmentApp({ embedded = false, startImmediately = false }: Props) {
   const [localState, setLocalState] = useState<LocalAppStateV1>(() => createEmptyLocalState());
@@ -370,10 +447,7 @@ export default function AssessmentApp({ embedded = false, startImmediately = fal
   const completionReady = answerExists(answers, currentId);
 
   return (
-    <section
-      class={`assessment ${embedded ? 'embedded' : ''}`}
-      aria-label="Night heat environmental assessment"
-    >
+    <section class={`assessment ${embedded ? 'embedded' : ''}`} aria-label="Night heat check">
       <div class="tool-utilities no-print">
         <button
           class="text-button"
@@ -408,8 +482,8 @@ export default function AssessmentApp({ embedded = false, startImmediately = fal
       )}
       {deletionStatus === 'failed' && (
         <p class="storage-warning" role="alert">
-          This browser did not allow complete deletion. Your plan remains visible; check browser
-          site-data controls before leaving this device.
+          We couldn’t delete everything. Your plan is still on this device. Use your browser’s
+          site-data settings to remove it.
         </p>
       )}
 
@@ -418,13 +492,13 @@ export default function AssessmentApp({ embedded = false, startImmediately = fal
           <p class="eyebrow">About two minutes · one question at a time</p>
           <h2>Find one thing to change tonight.</h2>
           <p>
-            We’ll compare the room, bed, timing, moisture, and partner conditions, then suggest
-            one low-burden environmental test.
+            We’ll ask about the room, bed, when the heat started, dampness, and your partner.
+            Then we’ll suggest one small change to try tonight.
           </p>
           {context && <p class="context-note">{contextCopy[context]}</p>}
           <p class="trust">
-            Private by default. No account, no name, and no health answers sent to us. Your plan
-            stays in this browser unless you print it.
+            No account or name. We don’t send your answers to us or anyone else. Your plan stays
+            in this browser unless you print it.
           </p>
           <p class="boundary-short">
             This cannot identify the medical cause of night sweats.{' '}
@@ -503,7 +577,7 @@ export default function AssessmentApp({ embedded = false, startImmediately = fal
           </fieldset>
           {!completionReady && (
             <p class="choice-hint" role="status">
-              Choose the closest answer. “I’m not sure” is a valid answer.
+              Choose the closest answer. It’s fine if you’re not sure.
             </p>
           )}
           <div class="question-actions">
@@ -520,15 +594,15 @@ export default function AssessmentApp({ embedded = false, startImmediately = fal
       {view === 'result' && result && experiment && (
         <div class="result">
           <p class="sr-only" role="status">
-            Assessment complete. Your environmental result follows.
+            Assessment complete. Your result follows.
           </p>
           <header class="result-summary">
-            <p class="eyebrow">{result.clarity.replaceAll('_', ' ')}</p>
+            <p class="eyebrow">{clarityLabels[result.clarity]}</p>
             <h2 id="result-heading" tabIndex={-1}>
               {result.explanation.title}
             </h2>
             <p class="result-lede">{result.explanation.interpretation}</p>
-            <h3>Your clues</h3>
+            <h3>What you told us</h3>
             <ul>
               {result.explanation.clues.slice(0, 4).map((clue) => (
                 <li key={clue}>{clue}</li>
@@ -548,11 +622,11 @@ export default function AssessmentApp({ embedded = false, startImmediately = fal
             <p class="eyebrow">One Change Tonight</p>
             <h3 id="experiment-heading">{experiment.plainLanguageName}</h3>
             <p class="change">
-              <strong>Change one variable:</strong> {experiment.oneVariableToChange}
+              <strong>Tonight:</strong> {experiment.oneVariableToChange}
             </p>
             <div class="result-grid">
               <div>
-                <h4>Keep constant</h4>
+                <h4>Keep the same</h4>
                 <ul>
                   {experiment.keepConstant.map((item) => (
                     <li key={item}>{item}</li>
@@ -560,7 +634,7 @@ export default function AssessmentApp({ embedded = false, startImmediately = fal
                 </ul>
               </div>
               <div>
-                <h4>Simple steps</h4>
+                <h4>What to do</h4>
                 <ol>
                   {experiment.steps.map((item) => (
                     <li key={item}>{item}</li>
@@ -568,13 +642,13 @@ export default function AssessmentApp({ embedded = false, startImmediately = fal
                 </ol>
               </div>
             </div>
-            <h4>Record tomorrow</h4>
+            <h4>In the morning, note</h4>
             <ul>
               {experiment.whatToRecord.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
-            <h4>Stop when</h4>
+            <h4>Stop if</h4>
             <ul>
               {experiment.stopConditions.map((item) => (
                 <li key={item}>{item}</li>
@@ -586,10 +660,6 @@ export default function AssessmentApp({ embedded = false, startImmediately = fal
           <section class="do-not-buy">
             <p class="eyebrow">{result.doNotBuy.title}</p>
             <p>{result.doNotBuy.body}</p>
-            <p>
-              We currently receive no commission from the products or product categories
-              discussed.
-            </p>
           </section>
 
           {result.modifiers.includes('one_sided_solution_needed') && (
@@ -597,14 +667,13 @@ export default function AssessmentApp({ embedded = false, startImmediately = fal
               <h3>Build a plan for both sides of the bed</h3>
               <dl class="partner-needs">
                 <div>
-                  <dt>The cold-sensitive sleeper needs</dt>
-                  <dd>A tolerable shared room and enough insulation on their own side.</dd>
+                  <dt>For the cooler sleeper</dt>
+                  <dd>Keep the room comfortable and use warmer covers on their side.</dd>
                 </div>
                 <div>
                   <dt>What can be separated first</dt>
                   <dd>
-                    Top covers, local airflow, or another reversible surface condition on only
-                    the warmer side.
+                    Top covers, airflow, or another reversible change on the warmer side only.
                   </dd>
                 </div>
                 <div>
@@ -615,23 +684,23 @@ export default function AssessmentApp({ embedded = false, startImmediately = fal
                   </dd>
                 </div>
                 <div>
-                  <dt>First low-cost experiment</dt>
+                  <dt>Try this first</dt>
                   <dd>
-                    Use separate existing covers or one familiar local measure before comparing
-                    powered zones.
+                    Use separate existing covers or a cooling step you already use safely before
+                    comparing powered equipment.
                   </dd>
                 </div>
               </dl>
               <p>
-                Two people in the same bed may need different thermal conditions. Neither person
-                is the problem.
+                You and your partner may need different covers or airflow. Start with changes
+                you can keep to one side.
               </p>
-              <a href="/guides/how-to-cool-one-side-of-a-bed/">Compare one-sided mechanisms</a>
+              <a href="/guides/how-to-cool-one-side-of-a-bed/">See ways to cool one side</a>
             </section>
           )}
 
           <section class="premium-fit">
-            <h3>Premium mechanism fit</h3>
+            <h3>Should you compare powered bed cooling?</h3>
             <p>
               <strong>{premiumLabels[result.premiumFit.fit]}.</strong>
             </p>
@@ -650,22 +719,20 @@ export default function AssessmentApp({ embedded = false, startImmediately = fal
                   onChange={(event) => setAcceptsPremiumTradeoffs(event.currentTarget.checked)}
                 />
                 <span>
-                  I am open to comparing possible noise, maintenance, complexity, and expense.
-                  This is not a purchase decision.
+                  I’m open to comparing noise, cleaning, upkeep, complexity, and cost.
                 </span>
               </label>
             )}
-            <a href="/compare/">Compare mechanisms without product rankings</a>
+            <a href="/compare/">Compare cooling approaches</a>
           </section>
 
           <section class="tracker" aria-labelledby="tracker-heading">
-            <h3 id="tracker-heading">Your three-night experiment</h3>
+            <h3 id="tracker-heading">Your three-night check</h3>
             <p>
-              Baseline → Night 1 → Night 2 → Night 3 → What changed. This is a short comfort
-              experiment, not a medical score.
+              Night 1 → Night 2 → Night 3 → Compare. This is a short comfort check, not a
+              medical score.
             </p>
             <div class="timeline" aria-label="Three-night progress">
-              <span class="done">Baseline</span>
               {[1, 2, 3].map((night) => (
                 <span
                   class={
@@ -678,6 +745,7 @@ export default function AssessmentApp({ embedded = false, startImmediately = fal
                   Night {night}
                 </span>
               ))}
+              <span class={localState.morningCheckIns.length === 3 ? 'done' : ''}>Compare</span>
             </div>
             {localState.morningCheckIns.length < 3 && (
               <form class="check-in" onSubmit={saveCheckIn}>
@@ -720,41 +788,37 @@ export default function AssessmentApp({ embedded = false, startImmediately = fal
             )}
             {localState.morningCheckIns.length > 0 && (
               <div class="checkin-summary">
-                <h4>Simple comparison</h4>
+                <h4>Night-by-night notes</h4>
                 {localState.morningCheckIns.map((entry) => (
                   <p key={entry.night}>
-                    <strong>Night {entry.night}:</strong>{' '}
-                    {entry.heatRelatedAwakenings.replace('_plus', '+')} awakenings;{' '}
-                    {entry.moisture}; cold afterwards{' '}
-                    {entry.becameColdAfterwards.replaceAll('_', ' ')}; helped{' '}
-                    {entry.experimentHelp}.
+                    <strong>Night {entry.night}:</strong> {formatMorningCheckIn(entry)}.
                   </p>
                 ))}
                 <p>
-                  <strong>What appeared to improve:</strong>{' '}
+                  <strong>Did it help?</strong>{' '}
                   {localState.morningCheckIns.some(
                     (entry) =>
                       entry.experimentHelp === 'clearly' || entry.experimentHelp === 'somewhat',
                   )
-                    ? 'At least one night showed a comfort improvement.'
-                    : 'No consistent improvement recorded yet.'}
+                    ? 'You rated the change “somewhat” or “clearly” helpful on at least one night.'
+                    : 'You have not recorded a clear improvement yet.'}
                 </p>
                 <p>
-                  <strong>What remained unchanged:</strong> Review any recurring awakenings,
-                  dampness, or cold-afterwards entries above.
+                  <strong>What still happened?</strong> Check the notes above for awakenings,
+                  dampness, or feeling cold afterward.
                 </p>
                 <p>
-                  <strong>Consistency:</strong>{' '}
+                  <strong>Did the result repeat?</strong>{' '}
                   {localState.morningCheckIns.length < 2
-                    ? 'More than one night is needed to compare consistency.'
+                    ? 'Record another night before comparing.'
                     : new Set(localState.morningCheckIns.map((entry) => entry.experimentHelp))
                           .size === 1
-                      ? 'The help rating was consistent across recorded nights.'
-                      : 'The result varied across recorded nights.'}
+                      ? 'You gave the same help rating on each recorded night.'
+                      : 'Your help rating changed across nights.'}
                 </p>
                 {localState.morningCheckIns.length === 3 && (
                   <p>
-                    <strong>Next environmental question:</strong>{' '}
+                    <strong>What to try next:</strong>{' '}
                     {localState.morningCheckIns.some(
                       (entry) =>
                         entry.experimentHelp === 'clearly' ||
@@ -778,16 +842,21 @@ export default function AssessmentApp({ embedded = false, startImmediately = fal
           <section class="appointment-notes">
             <h3>Appointment note</h3>
             <p>
-              Observed pattern: {result.explanation.title}. This is an environmental
-              description, not a diagnosis.
+              Tool summary: {result.explanation.title}. This describes the sleep environment,
+              not a diagnosis.
             </p>
             <p>
-              Frequency answer: {answers.frequency?.replaceAll('_', ' ') ?? 'not answered'}. New
-              or worsening: {answers.change_status?.replaceAll('_', ' ') ?? 'not answered'}.
+              Sleep disruption:{' '}
+              {answers.frequency ? frequencyDisplayLabels[answers.frequency] : 'Not answered'}.
+              New or getting worse:{' '}
+              {answers.change_status
+                ? changeStatusDisplayLabels[answers.change_status]
+                : 'Not answered'}
+              .
             </p>
             <p>
-              Bring this as a memory aid. A qualified healthcare professional decides which
-              personal history, examination, or testing is relevant.
+              You can bring this note to an appointment. A qualified healthcare professional can
+              decide which history, examination, or tests may matter.
             </p>
           </section>
 
@@ -807,8 +876,8 @@ export default function AssessmentApp({ embedded = false, startImmediately = fal
             </button>
           </div>
           <p class="storage-explanation">
-            Your private state is stored only in this browser for up to 90 days. Deleting it
-            clears assessment answers, the plan, and morning check-ins immediately.
+            Your answers and check-ins stay only in this browser for up to 90 days. Delete local
+            data to remove them now.
           </p>
         </div>
       )}

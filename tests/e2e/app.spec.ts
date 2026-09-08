@@ -33,16 +33,16 @@ async function choose(page: Page, label: string) {
 
 async function completeCheckIn(page: Page, night: 1 | 2 | 3) {
   await page.getByLabel('Heat-related awakenings').selectOption(night === 1 ? '1' : '0');
-  await page.getByLabel('Moisture').selectOption(night === 1 ? 'damp' : 'dry');
-  await page.getByLabel('Became cold afterwards').selectOption(night === 1 ? 'slightly' : 'no');
-  await page.getByLabel('Time to comfort').selectOption('10_to_30_minutes');
-  await page.getByLabel('Partner disturbed').selectOption('no');
+  await page.getByLabel('How damp were you?').selectOption(night === 1 ? 'damp' : 'dry');
   await page
-    .getByLabel('Did the experiment help?')
+    .getByLabel('Did you become cold afterward?')
+    .selectOption(night === 1 ? 'slightly' : 'no');
+  await page.getByLabel('Time until comfortable again').selectOption('10_to_30_minutes');
+  await page.getByLabel('Was your partner disturbed?').selectOption('no');
+  await page
+    .getByLabel('Did the change help?')
     .selectOption(night === 3 ? 'clearly' : 'somewhat');
-  await page
-    .getByLabel('Continue the same experiment?')
-    .selectOption(night === 3 ? 'no' : 'yes');
+  await page.getByLabel('Try the same change again?').selectOption(night === 3 ? 'no' : 'yes');
   await page.getByRole('button', { name: `Save night ${night}` }).click();
 }
 
@@ -79,6 +79,7 @@ test('homepage begins with first value, selection does not auto-advance, and mob
     () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
   );
   expect(overflow).toBeLessThanOrEqual(1);
+  await expect(page.locator('footer').getByRole('link', { name: 'Evidence' })).toBeVisible();
   await page.screenshot({
     path: join(screenshotDir, 'homepage-mobile-375.png'),
     fullPage: true,
@@ -133,25 +134,25 @@ test('complete assessment, go back, restore, check in, print, theme, start over,
   await choose(page, 'Five or more nights a week');
   await choose(page, 'Yes');
   await choose(page, 'I became cold or shivery');
-  await choose(page, 'Some noise is acceptable');
+  await choose(page, 'Some sound is okay');
 
   await expect(
     page.getByRole('heading', {
-      name: 'The observations lean toward heat concentrated around you',
+      name: 'The heat may be more local than room-wide',
     }),
   ).toBeVisible();
   await expect(page.locator('#result-heading')).toBeFocused();
   await expect(page.getByRole('heading', { name: 'What this does not mean' })).toBeVisible();
   await expect(page.locator('.experiment-card .eyebrow')).toHaveText('One Change Tonight');
-  await expect(page.getByText('Neither person is the problem.')).toBeVisible();
+  await expect(
+    page.getByText(/You and your partner may need different covers or airflow/),
+  ).toBeVisible();
   await expect(
     page.getByRole('heading', { name: 'Keep healthcare in the plan' }),
   ).toBeVisible();
-  await expect(page.getByText('Worth comparing only after lower-cost tests.')).toBeVisible();
-  await page.getByLabel(/open to comparing possible noise/).check();
-  await expect(
-    page.getByText('Fits the stated constraint and accepted tradeoffs.'),
-  ).toBeVisible();
+  await expect(page.getByText('Maybe, after simpler tests.')).toBeVisible();
+  await page.getByLabel(/open to comparing noise/).check();
+  await expect(page.getByText('Worth comparing if the trade-offs work for you.')).toBeVisible();
   expect(requestsAfterLoad).toHaveLength(0);
   await page.screenshot({
     path: join(screenshotDir, 'result-sudden-personal.png'),
@@ -167,7 +168,7 @@ test('complete assessment, go back, restore, check in, print, theme, start over,
   await waitForHydration(page);
   await expect(
     page.getByRole('heading', {
-      name: 'The observations lean toward heat concentrated around you',
+      name: 'The heat may be more local than room-wide',
     }),
   ).toBeVisible();
   await expect(page.locator('#result-heading')).toBeFocused();
@@ -194,8 +195,8 @@ test('complete assessment, go back, restore, check in, print, theme, start over,
   await expect(page.getByRole('heading', { name: 'Morning check-in: night 3' })).toBeVisible();
   await completeCheckIn(page, 3);
   await expect(page.getByText('Night 3:', { exact: false })).toBeVisible();
-  await expect(page.getByText('Next environmental question:', { exact: false })).toBeVisible();
-  await expect(page.getByText(/Night 3:.*cold afterwards no/)).toBeVisible();
+  await expect(page.getByText('What to try next:', { exact: false })).toBeVisible();
+  await expect(page.getByText(/Night 3:.*Did not become cold afterward/)).toBeVisible();
   await expect(page.getByText(/up to two more nights/i)).toHaveCount(0);
   await page.screenshot({
     path: join(screenshotDir, 'three-night-tracker.png'),
@@ -266,7 +267,7 @@ test('all four result families render through browser-restored state', async ({ 
         change_status: 'no',
         whole_room_cooling_effect: 'helped_a_lot',
       },
-      heading: 'The whole room appears to be contributing',
+      heading: 'Start with the room',
       experiment: 'observe_room_and_both_sleepers',
     },
     {
@@ -280,7 +281,7 @@ test('all four result families render through browser-restored state', async ({ 
         change_status: 'no',
         whole_room_cooling_effect: 'helped_somewhat',
       },
-      heading: 'Heat may be accumulating around the bed',
+      heading: 'Start with one bed layer',
       experiment: 'change_one_bed_layer',
     },
     {
@@ -295,7 +296,7 @@ test('all four result families render through browser-restored state', async ({ 
         after_episode: 'became_cold_or_shivery',
         noise_sensitivity: 'some_noise_acceptable',
       },
-      heading: 'The observations lean toward heat concentrated around you',
+      heading: 'The heat may be more local than room-wide',
       experiment: 'local_comfort_during_episode',
     },
     {
@@ -309,7 +310,7 @@ test('all four result families render through browser-restored state', async ({ 
         change_status: 'not_sure',
         whole_room_cooling_effect: 'helped_a_lot',
       },
-      heading: 'More than one pattern may be involved',
+      heading: 'Your answers point in different directions',
       experiment: 'measure_first',
     },
   ];
@@ -378,6 +379,7 @@ test('uncertainty, responsive reflow, reduced motion, keyboard focus, high contr
     { width: 430, height: 932 },
     { width: 768, height: 1024 },
     { width: 1024, height: 768 },
+    { width: 1280, height: 900 },
     { width: 1440, height: 1000 },
   ];
 
@@ -445,10 +447,8 @@ test('awake flow, contextual handoff, public HTML without JavaScript, source lin
   await choose(page, 'Mainly I feel hot');
   await choose(page, 'Comfortable or cold');
   await choose(page, 'Suddenly');
-  await expect(
-    page.getByRole('heading', { name: 'Change one thing, then let the night be simple.' }),
-  ).toBeVisible();
-  await page.getByRole('button', { name: 'Save a private morning reminder' }).click();
+  await expect(page.getByRole('heading', { name: 'Try one small change now.' })).toBeVisible();
+  await page.getByRole('button', { name: 'Save a reminder for morning' }).click();
   await expect(page.getByText('Reminder saved in this browser only.')).toBeVisible();
   await page.screenshot({
     path: join(screenshotDir, 'awake-and-hot-mobile.png'),
@@ -456,22 +456,61 @@ test('awake flow, contextual handoff, public HTML without JavaScript, source lin
   });
 
   await page.goto('/why/waking-sweaty-in-a-cold-room/');
-  await expect(page.getByRole('heading', { name: 'Direct answer' })).toBeVisible();
+  await expect(page.locator('#direct-answer')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Short answer' })).toBeVisible();
+  await expect(page.getByText('Who this is for:', { exact: false })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'When this applies' })).toBeVisible();
+  await expect(page.getByText('What we don’t know:', { exact: false })).toBeVisible();
+  await expect(
+    page.getByText('Observe: For one night, note whether heat began', { exact: false }),
+  ).toBeVisible();
+  await expect(
+    page.getByText('Keep the same: Leave the thermostat', { exact: false }),
+  ).toBeVisible();
+  await expect(page.getByText('Evidence strength:', { exact: false })).toBeVisible();
+  const sourceDetailsLink = page.getByRole('link', { name: 'Use and details' }).first();
+  await expect(sourceDetailsLink).toBeVisible();
+  const sourceDetailsHref = (await sourceDetailsLink.getAttribute('href')) ?? '';
+  expect(sourceDetailsHref).toMatch(/^\/sources\/#/);
+  await expect(
+    page.getByText('Answer questions about the room, bed, timing, and moisture.', {
+      exact: false,
+    }),
+  ).toBeVisible();
+  await expect(page.getByText(/Reviewed September 8, 2026/)).toBeVisible();
   expect(await page.locator('a[href^="https://"]').count()).toBeGreaterThan(0);
   await page.screenshot({
     path: join(screenshotDir, 'search-article-mobile.png'),
     fullPage: true,
   });
-  await page.getByRole('link', { name: 'Find tonight’s change' }).last().click();
+  await page.getByRole('link', { name: 'Start the private check' }).click();
   await waitForHydration(page);
-  await expect(page.getByText('A cool room can be only one part of the night.')).toBeVisible();
+  await expect(page.getByText(/A cool room is only one part of the night/)).toBeVisible();
+
+  await page.goto(sourceDetailsHref);
+  await expect(page.locator(':target')).toBeVisible();
+  await expect(page.getByText('Used here for:', { exact: false }).first()).toBeVisible();
 
   const noJs = await browser.newContext({ javaScriptEnabled: false });
   const noJsPage = await noJs.newPage();
   await noJsPage.goto('/why/waking-sweaty-in-a-cold-room/');
-  await expect(noJsPage.getByRole('heading', { name: 'Direct answer' })).toBeVisible();
+  await expect(noJsPage.locator('#direct-answer')).toBeVisible();
   await expect(noJsPage.locator('#one-change-tonight')).toBeVisible();
   await noJs.close();
+
+  await page.goto('/compare/passive-vs-active-bed-cooling/');
+  const stop = page.getByText('Stop:', { exact: true });
+  const purchaseHeading = page.getByRole('heading', { name: 'Before you compare products' });
+  await expect(
+    page.getByRole('heading', { name: 'Room, bedding, and clothing' }),
+  ).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Air-based systems' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Water-based systems' })).toBeVisible();
+  await expect(stop).toBeVisible();
+  await expect(purchaseHeading).toBeVisible();
+  expect((await stop.boundingBox())?.y).toBeLessThan(
+    (await purchaseHeading.boundingBox())?.y ?? 0,
+  );
 
   const missing = await request.get('/this-page-does-not-exist/');
   expect(missing.status()).toBe(404);

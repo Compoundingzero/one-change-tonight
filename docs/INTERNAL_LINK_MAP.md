@@ -93,7 +93,7 @@ External authoritative links should open normally in the same browsing context u
 | Route                | Minimum inbound source                    | Key outbound                                                                   |
 | -------------------- | ----------------------------------------- | ------------------------------------------------------------------------------ |
 | `/privacy/`          | Header, tool utility, footer              | Methodology; contact; local delete instructions                                |
-| `/editorial-policy/` | Footer, evidence, comparison disclosures  | Sources; corrections; medical boundaries                                       |
+| `/editorial-policy/` | Footer, sitemap                           | Sources; corrections; medical boundaries                                       |
 | `/corrections/`      | Footer, source register, editorial policy | Contact; affected source/page links in each entry                              |
 | `/about/`            | Footer or header/about context; evidence  | How it works; editorial policy; contact                                        |
 | `/contact/`          | Footer, corrections, privacy              | Owner-approved channels only; warn against sending personal health information |

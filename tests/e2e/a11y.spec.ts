@@ -43,7 +43,7 @@ test('every common, sudden, and optional question plus result and tracker has no
   await checkQuestionAndContinue(page, 'frequency', 'One or two nights a week');
   await checkQuestionAndContinue(page, 'change status', 'No');
   await checkQuestionAndContinue(page, 'after episode', 'I became comfortable');
-  await checkQuestionAndContinue(page, 'noise sensitivity', 'Some noise is acceptable');
+  await checkQuestionAndContinue(page, 'noise sensitivity', 'Some sound is okay');
   await assertNoSeriousOrCritical(page, 'result and tracker');
 });
 

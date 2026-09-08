@@ -97,7 +97,7 @@ The emergency-adjacent phrase “seek urgent help if you feel seriously unwell�
 | Back / Continue    | Stable location; Continue disabled until an answer including “not sure” exists | Disabled state needs adequate contrast and adjacent instruction                                   |
 | Result summary     | Focus heading on entry; display clues and uncertainty                          | Avoid a percentage, risk meter, or diagnostic confidence visual                                   |
 | One Change Tonight | Visually strongest result block                                                | Pair change with constants, record, and stop conditions                                           |
-| Do Not Buy Yet     | Appears before premium comparisons                                             | Central noncommission disclosure; no retailer buttons                                             |
+| Do Not Buy Yet     | Appears before premium comparisons                                             | No retailer buttons or product-ranking CTA                                                        |
 | Morning check-in   | No prefilled observation masquerading as user input; up to three nights        | Labels remain sentence case; save confirmation is a scoped live status                            |
 | Delete local data  | Explicit effect and immediate confirmation                                     | No dark pattern; consider confirmation only if recoverability is impossible and explain that fact |
 | Print              | Output has title/date, observations, boundary, source links                    | One truthful print scope unless distinct scopes are implemented                                   |

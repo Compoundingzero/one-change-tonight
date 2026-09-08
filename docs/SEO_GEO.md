@@ -40,7 +40,7 @@ Every indexable guide/comparison should render the important content in static H
 7. observable “fits / may not fit” signals;
 8. decision table or mechanism comparison;
 9. one reversible experiment: change, constants, steps, morning record, stop conditions;
-10. “Do Not Buy Yet” and centralized no-commission disclosure;
+10. purchase guidance without rankings or retailer links;
 11. what the result does not establish;
 12. assessment CTA with privacy statement;
 13. descriptive internal next-question links;

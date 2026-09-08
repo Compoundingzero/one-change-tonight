@@ -22,15 +22,15 @@ const BEDDING_OR_SURFACE_ATTEMPTS = new Set([
 
 function clueIsSupported(clue: string, answers: AssessmentAnswers): boolean {
   switch (clue) {
-    case 'You described heat building gradually.':
+    case 'Heat built gradually.':
       return answers.wake_experience === 'gradually_too_hot';
-    case 'You reported that the bed became hotter over time.':
+    case 'The bed got hotter over time.':
       return answers.wake_experience === 'bed_became_hotter';
-    case 'You reported that the whole bedroom felt hot.':
+    case 'The whole bedroom felt hot.':
       return answers.wake_experience === 'whole_bedroom_hot';
-    case 'You described the heat arriving as a sudden wave.':
+    case 'Heat came as a sudden wave.':
       return answers.wake_experience === 'sudden_wave';
-    case 'You reported waking damp or soaked.':
+    case 'You woke damp or soaked.':
       return answers.wake_experience === 'woke_damp_or_soaked';
     case 'The other sleeper was also hot.':
       return answers.co_sleeper_state === 'partner_also_hot';
@@ -40,11 +40,11 @@ function clueIsSupported(clue: string, answers: AssessmentAnswers): boolean {
       return answers.co_sleeper_state === 'partner_cold';
     case 'You stayed hot after waking.':
       return answers.after_episode === 'stayed_hot';
-    case 'You reported that the heat did not ease.':
+    case 'The heat did not ease.':
       return answers.after_episode === 'heat_did_not_ease';
     case 'You became comfortable after the heat passed.':
       return answers.after_episode === 'became_comfortable';
-    case 'You became cold or shivery afterwards.':
+    case 'You became cold or shivery afterward.':
       return answers.after_episode === 'became_cold_or_shivery';
     case 'The strongest heat felt underneath you or around the mattress.':
       return answers.heat_location === 'underneath_or_mattress';
@@ -54,7 +54,7 @@ function clueIsSupported(clue: string, answers: AssessmentAnswers): boolean {
       return answers.heat_location === 'upper_body_face_or_chest';
     case 'You felt the heat throughout the room.':
       return answers.heat_location === 'throughout_room';
-    case 'You reported damp or clammy skin.':
+    case 'Your skin felt damp or clammy.':
       return answers.heat_location === 'damp_or_clammy_skin';
     case 'Changing the whole-room conditions helped a lot.':
       return answers.whole_room_cooling_effect === 'helped_a_lot';
@@ -64,41 +64,41 @@ function clueIsSupported(clue: string, answers: AssessmentAnswers): boolean {
       return answers.whole_room_cooling_effect === 'did_not_solve';
     case 'Changing the whole-room conditions made the other sleeper too cold.':
       return answers.whole_room_cooling_effect === 'partner_became_too_cold';
-    case 'You have already tried at least one bedding or surface-cooling change.':
+    case 'You already tried a bedding or surface-cooling change.':
       return (
         answers.previous_attempts?.some((attempt) =>
           BEDDING_OR_SURFACE_ATTEMPTS.has(attempt),
         ) === true
       );
-    case 'You selected “I’m not sure” for how the heat began.':
+    case 'You weren’t sure how the heat began.':
       return answers.wake_experience === 'not_sure';
-    case 'You reported sleeping alone.':
+    case 'You sleep alone.':
       return answers.co_sleeper_state === 'sleep_alone';
-    case 'You selected “I’m not sure” for the other sleeper’s experience.':
+    case 'You weren’t sure how the room felt to another sleeper.':
       return answers.co_sleeper_state === 'not_sure';
-    case 'You selected “I’m not sure” for what happened after the episode.':
+    case 'You weren’t sure what happened after the heat eased.':
       return answers.after_episode === 'not_sure';
-    case 'You selected “I’m not sure” for where the heat was strongest.':
+    case 'You weren’t sure where the heat felt strongest.':
       return answers.heat_location === 'not_sure';
-    case 'You selected that whole-room cooling had not been tried.':
+    case 'You have not tried cooling the whole room.':
       return answers.whole_room_cooling_effect === 'not_tried';
-    case 'You selected “I’m not sure” for the effect of whole-room cooling.':
+    case 'You weren’t sure whether cooling the whole room helped.':
       return answers.whole_room_cooling_effect === 'not_sure';
-    case 'You reported that you have not tried an environmental change yet.':
+    case 'You have not tried a room, bed, or personal cooling change yet.':
       return answers.previous_attempts?.includes('nothing_yet') === true;
-    case 'You were not sure which environmental changes you had tried.':
+    case 'You weren’t sure which changes you had tried.':
       return answers.previous_attempts?.includes('not_sure') === true;
-    case 'No answer was recorded for how the heat began.':
+    case 'No answer yet about how the heat began.':
       return answers.wake_experience === undefined;
-    case 'No answer was recorded for the other sleeper’s experience.':
+    case 'No answer yet about another sleeper.':
       return answers.co_sleeper_state === undefined;
-    case 'No answer was recorded for what happened after the episode.':
+    case 'No answer yet about what happened after the heat eased.':
       return answers.after_episode === undefined;
-    case 'No answer was recorded for where the heat was strongest.':
+    case 'No answer yet about where the heat felt strongest.':
       return answers.heat_location === undefined;
-    case 'No answer was recorded for the effect of whole-room cooling.':
+    case 'No answer yet about whether cooling the room helped.':
       return answers.whole_room_cooling_effect === undefined;
-    case 'You explicitly reported both dampness and becoming cold or shivery afterwards.':
+    case 'You said you woke damp and later felt cold or shivery.':
       return (
         (answers.wake_experience === 'woke_damp_or_soaked' ||
           answers.heat_location === 'damp_or_clammy_skin') &&
@@ -220,7 +220,9 @@ describe('decision engine supplied fixtures', () => {
     expect(['sudden_personal_heat', 'mixed_or_uncertain']).toContain(result.primaryPattern);
     expect(result.modifiers).toContain('moisture_may_prolong_discomfort');
     expect(result.experimentId).toBe('prepare_one_dry_layer');
-    expect(result.explanation.doesNotEstablish).toContain('cannot determine the medical cause');
+    expect(result.explanation.doesNotEstablish).toContain(
+      'does not explain why the heat happened',
+    );
   });
 
   it('does not force a conclusion when room and sudden evidence conflict', () => {
@@ -255,7 +257,7 @@ describe('decision engine supplied fixtures', () => {
     expect(result.clarity).toBe('mixed_pattern');
     expect(result.explanation.clues).toEqual(
       expect.arrayContaining([
-        'You described the heat arriving as a sudden wave.',
+        'Heat came as a sudden wave.',
         'The other sleeper was also hot.',
         'The strongest heat felt underneath you or around the mattress.',
       ]),
@@ -379,7 +381,9 @@ describe('decision engine boundaries', () => {
     expect(result.experimentId).toBe('measure_first');
     expect(result.premiumFit.fit).toBe('premium_active_cooling_not_yet_justified');
     expect(result.doNotBuy.id).toBe('do_not_choose_active_system_yet');
-    expect(result.doNotBuy.body).toContain('clearer baseline');
+    expect(result.doNotBuy.body).toContain(
+      'record one baseline night without changing your usual setup',
+    );
   });
 
   it('uses a dry-layer experiment only with moisture plus recovery evidence', () => {
@@ -523,10 +527,7 @@ describe('decision engine boundaries', () => {
     expect(singleHighWeightSignal.primaryPattern).toBe('mixed_or_uncertain');
     expect(singleHighWeightSignal.clarity).toBe('not_enough_information');
     expect(singleHighWeightSignal.explanation.clues).toEqual(
-      expect.arrayContaining([
-        'You described the heat arriving as a sudden wave.',
-        'You reported sleeping alone.',
-      ]),
+      expect.arrayContaining(['Heat came as a sudden wave.', 'You sleep alone.']),
     );
   });
 

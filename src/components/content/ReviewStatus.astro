@@ -4,14 +4,14 @@ interface Props {
   published?: string;
   reviewed?: string;
 }
-const { published = '2026-09-07', reviewed = '2026-09-07' } = Astro.props;
+const { published = '2026-09-07', reviewed = '2026-09-08' } = Astro.props;
 const formatDate = (value: string) =>
   new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'UTC' }).format(
     new Date(`${value}T00:00:00Z`),
   );
 ---
 
-<div class="review" aria-label="Editorial review status">
+<div class="review" aria-label="Source review status">
   <strong>{siteConfig.evidenceReviewLabel}</strong>
   <span
     >Published {formatDate(published)} · Reviewed {formatDate(reviewed)} · <a

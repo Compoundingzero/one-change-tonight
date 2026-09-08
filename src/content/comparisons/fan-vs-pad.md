@@ -1,29 +1,29 @@
 ---
 path: /compare/bed-fan-vs-water-pad/
 title: Bed Fan Versus Water-Cooled Mattress Pad
-description: Current air and water examples use different components and contact points. Compare documented setup, perceived sound, surface feel, and care without rankings.
-eyebrow: A practical active-cooling fork
-audience: This comparison is for someone who has evidence that a local active mechanism may fit and wants to understand the tradeoffs.
-directAnswer: A current air-based example uses a powered unit and hose to move air through bedding; a current water-based example circulates water through a pad touching the sleep surface. Their manuals document different parts, setup, and care. They do not independently prove which one will feel better for a particular sleeper.
-uncertainty: This site has not physically tested current products, and a manufacturer’s performance claim should not be treated as independent evidence.
+description: Compare draft, sound, contact feel, placement, water care, and cleaning using the current manuals for the exact products.
+eyebrow: What each system adds to the bed
+audience: You are choosing between moving air through bedding and lying on a water-cooled pad.
+directAnswer: BedJet’s current guide describes a powered unit and hose that move air through bedding. Sleepme’s current documentation describes water circulating through a pad on the sleep surface. The first adds moving air and a nozzle; the second adds a contact pad, reservoir, hose, water care, and cleaning. The manufacturers do not independently prove which will feel better for you.
+uncertainty: We have not used or compared these systems. Perceived sound, draft, surface feel, side coverage, reliability, and upkeep require direct checking.
 applies:
-  - Heat or moisture is concentrated in the bed rather than the whole room.
-  - Only one side needs stronger control.
-  - Noise, draft, surface feel, and upkeep are meaningful constraints.
+  - A local bed problem remains after no-cost changes.
+  - Draft and contact feel would lead you to prefer one setup.
+  - You can accept the parts and care listed in the current manual.
 mayNotApply:
-  - A no-cost local airflow or bedding test has not yet provided evidence.
+  - You do not yet know whether moving air helps or whether the bed itself stays warm.
 observations:
-  - The air example changes moving air within the bedding setup.
-  - The water example changes the temperature-controlled pad at the sleep surface.
-  - Powered components, contact feel, and the exact side coverage deserve direct verification.
-experimentName: Repeat a low-setting airflow test
-experimentChange: Use existing directed airflow at the lowest useful level on one side.
-experimentConstant: Keep room, covers, and sleepwear unchanged.
+  - Whether moving air feels helpful, drying, drafty, or distracting.
+  - Whether lying on a pad changes comfort or the feel of the mattress surface.
+  - Whether noise, water care, cleaning, and hose placement fit the bedroom.
+experimentName: List the sensations and chores you will not accept
+experimentChange: Write down your limits for draft, sound, contact feel, water care, cleaning, hose placement, and side coverage.
+experimentConstant: Apply the same limits to both categories and use current manuals rather than promotional summaries.
 experimentSteps:
-  - Record whether moisture recovery or persistent surface heat changes.
-  - Use that result to decide which mechanism deserves further comparison.
-doNotBuy: Do not choose between powered categories until a free airflow test shows whether moving air addresses the unresolved part of the experience.
-safetyNote: Active cooling may affect comfort. It is not established here as a treatment or a way to reduce how often an underlying episode occurs.
+  - Eliminate air systems if moving air is unacceptable and water systems if a contact pad or water care is unacceptable.
+  - For any remaining option, verify placement and upkeep in the exact model’s manual.
+doNotBuy: Product category names do not settle draft, sound, contact feel, or maintenance. Check the physical setup and recurring work first.
+safetyNote: Powered bed cooling may change comfort. It is not established here as treatment or as a way to reduce how often an underlying episode occurs.
 sourceIds:
   [
     PMC-SLEEP-THERMAL-ENVIRONMENT-2012,
@@ -32,11 +32,14 @@ sourceIds:
     SLEEPME-DOCK-PRO-MANUAL-2026,
   ]
 broaderLink:
-  { label: Understand air and water mechanisms, href: /compare/air-vs-water-bed-cooling/ }
+  { label: See the full air-versus-water comparison, href: /compare/air-vs-water-bed-cooling/ }
 nextLink:
-  { label: What upkeep should you count?, href: /guides/bed-cooling-costs-and-maintenance/ }
+  {
+    label: 'Check cleaning, sound, and recurring upkeep',
+    href: /guides/bed-cooling-costs-and-maintenance/,
+  }
 context: mechanisms
 published: '2026-09-07'
-reviewed: '2026-09-07'
+reviewed: '2026-09-08'
 indexable: true
 ---

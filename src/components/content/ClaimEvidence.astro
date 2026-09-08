@@ -2,26 +2,62 @@
 import { claimsForRoute } from '@/data/claims/claims';
 interface Props {
   route: string;
+  compact?: boolean;
 }
-const records = claimsForRoute(Astro.props.route);
+const { route, compact = false } = Astro.props;
+const records = claimsForRoute(route);
+const claimLabels = {
+  medical_guidance: 'Medical guidance',
+  environmental_mechanism: 'Sleep-environment research',
+  manufacturer_example: 'Manufacturer description',
+  editorial_hypothesis: 'Unproven test suggested by this site',
+} as const;
+const confidenceLabels = {
+  high: 'High',
+  moderate: 'Moderate',
+  limited: 'Limited',
+} as const;
 ---
 
 {
   records.length > 0 && (
     <section id="claim-evidence" class="claim-evidence">
-      <h2>How the key claims are classified</h2>
-      {records.map((claim) => (
-        <article>
-          <h3>{claim.claimClass.replaceAll('_', ' ')}</h3>
-          <p>{claim.statement}</p>
-          <p class="boundary">
-            <strong>Boundary:</strong> {claim.boundary}
-          </p>
-          <p class="metadata">
-            Confidence in this scoped statement: {claim.confidence}. Reviewed {claim.reviewed}.
-          </p>
-        </article>
-      ))}
+      <h2>{compact ? 'Evidence notes' : 'What the evidence can show'}</h2>
+      {compact ? (
+        <ul>
+          {records.map((claim) => (
+            <li>
+              <h3>{claim.label}</h3>
+              <p class="metadata">
+                <strong>{claimLabels[claim.claimClass]}.</strong>{' '}
+                <strong>Evidence strength:</strong> {confidenceLabels[claim.confidence]}.
+              </p>
+              <p class="boundary">
+                <strong>Limit:</strong> {claim.boundary}
+              </p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        records.map((claim) => (
+          <article>
+            <h3>{claimLabels[claim.claimClass]}</h3>
+            <p>{claim.statement}</p>
+            <p class="boundary">
+              <strong>Limit:</strong> {claim.boundary}
+            </p>
+            <p class="metadata">
+              <strong>Evidence strength:</strong> {confidenceLabels[claim.confidence]}
+            </p>
+            <p class="metadata">Reviewed {claim.reviewed}.</p>
+          </article>
+        ))
+      )}
+      {compact && (
+        <p>
+          <a href="/evidence/">How this site rates evidence</a>
+        </p>
+      )}
     </section>
   )
 }
@@ -33,8 +69,16 @@ const records = claimsForRoute(Astro.props.route);
   .claim-evidence article {
     max-width: var(--measure);
   }
-  .claim-evidence h3 {
-    text-transform: capitalize;
+  .claim-evidence ul {
+    max-width: var(--measure);
+    padding-left: 1.2rem;
+  }
+  .claim-evidence li + li {
+    margin-top: 1rem;
+  }
+  .claim-evidence li h3 {
+    margin-bottom: 0.35rem;
+    font-size: 1rem;
   }
   .boundary {
     color: var(--ink-650);

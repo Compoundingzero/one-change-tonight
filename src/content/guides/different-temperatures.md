@@ -1,40 +1,40 @@
 ---
 path: /guides/different-sleep-temperatures/
-title: What to Do When One Partner Sleeps Hot and the Other Sleeps Cold
-description: Treat the bed as two local environments. Separate only the variables that differ while preserving the parts of the sleep setup that work for both.
-eyebrow: A cooperative two-sleeper plan
-audience: This guide is for partners who want different thermal conditions without turning the difference into a conflict.
-directAnswer: Two people in the same bed may need different insulation or airflow even when the shared room is comfortable. Keep shared variables stable, separate top covers first, and move to local active cooling only if simpler tests show that one side still needs continuous heat movement.
-uncertainty: Different comfort needs do not show whether a medical or environmental factor is causing repeated heat for either person.
+title: When One Partner Sleeps Hot and the Other Sleeps Cold
+description: Agree on the room conditions that work for both sleepers, then give each side its own top cover or local airflow.
+eyebrow: Agree on what stays shared
+audience: Two sleepers need different amounts of warmth in the same bed.
+directAnswer: First agree on a room temperature that is acceptable to both people. Then separate the parts that can differ by side, usually the top covers. Discuss noise and airflow before adding a fan. Consider powered side control only if the simpler arrangement leaves one person repeatedly uncomfortable.
+uncertainty: Different comfort needs do not explain why either person feels hot or cold. They only show that one shared setup may not suit both sleepers.
 applies:
-  - One partner is consistently comfortable or cold while the other is hot.
-  - A thermostat compromise leaves neither person comfortable.
-  - Shared covers or airflow affect both sleepers.
+  - One sleeper is often hot while the other is comfortable or cold.
+  - Thermostat changes leave at least one person uncomfortable.
+  - Shared covers or shared airflow cause the disagreement.
 mayNotApply:
   - Both sleepers want the same change to the whole room.
 observations:
-  - Each sleeper needs a different amount of insulation.
-  - Noise tolerance differs between the two sides.
-  - One change may disturb a partner even when it helps the hot sleeper.
-experimentName: Build a two-cover baseline
-experimentChange: Replace one shared top cover with separate existing covers.
-experimentConstant: Keep the room, fan, sleepwear, and mattress setup unchanged.
+  - Which room conditions already work for both people.
+  - How much top-cover insulation each person wants.
+  - Which sounds, drafts, and nighttime adjustments disturb either sleeper.
+experimentName: Agree on a two-cover baseline
+experimentChange: Replace one shared top cover with separate covers that are already available.
+experimentConstant: Leave the room, fan, sleepwear, and mattress setup unchanged.
 experimentSteps:
-  - Agree which shared conditions already work and leave those alone.
-  - Record each sleeper’s comfort and any disturbance without scoring the relationship.
-doNotBuy: Do not purchase a complex dual-zone system before a quiet, separate-bedding baseline has been tried.
-safetyNote: Partner-temperature mismatch is a description of comfort, not a medical label for either person.
+  - Each sleeper chooses the amount of top-cover warmth they want without changing the other side.
+  - In the morning, compare comfort and disturbance without treating either preference as the problem.
+doNotBuy: Use a quiet two-cover setup before considering a dual-zone system. It may solve the difference without motors, controls, or maintenance.
+safetyNote: A temperature difference between partners describes comfort, not a diagnosis or a medical label for either person.
 sourceIds:
   [PMC-SLEEP-THERMAL-ENVIRONMENT-2012, BEDJET-INSTALLATION-2026, SLEEPME-HOW-IT-WORKS-2026]
 broaderLink:
-  { label: Build one side of the bed first, href: /guides/how-to-cool-one-side-of-a-bed/ }
+  { label: Set up the warmer side of the bed, href: /guides/how-to-cool-one-side-of-a-bed/ }
 nextLink:
   {
-    label: When might active cooling be worth comparing?,
+    label: Know when powered cooling is worth comparing,
     href: /guides/is-active-bed-cooling-worth-it/,
   }
 context: partner-temperature
 published: '2026-09-07'
-reviewed: '2026-09-07'
+reviewed: '2026-09-08'
 indexable: true
 ---

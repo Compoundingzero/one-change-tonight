@@ -12,7 +12,7 @@ The result leads into a three-night browser-local tracker, print plan, print app
 
 ## Public corpus
 
-Twenty-four query-led articles plus framework, pattern, comparison, evidence, methodology, source, editorial, boundary, privacy, terms, corrections, about, contact, and sitemap pages. Each search page opens with a direct answer and uncertainty, supplies a discriminating table and one experiment, includes a query-specific safety note and non-commercial “Do Not Buy Yet” guidance, and links to both a broader concept and the next likely question.
+Twenty-four query-led articles plus framework, pattern, comparison, evidence, methodology, source, editorial, boundary, privacy, terms, corrections, about, contact, and sitemap pages. Each search page opens with a direct answer and uncertainty, supplies a discriminating table and one experiment, includes a query-specific safety note and “Do Not Buy Yet” guidance, and links to both a broader concept and the next likely question.
 
 ## Non-goals
 

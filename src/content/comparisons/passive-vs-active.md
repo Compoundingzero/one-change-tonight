@@ -1,29 +1,29 @@
 ---
 path: /compare/passive-vs-active-bed-cooling/
-title: Passive Versus Active Bed Cooling
-description: Passive layers change the bed stack without power. Current active examples use powered air or circulated water and document additional components and care.
-eyebrow: Two different mechanism families
-audience: This comparison is for someone who wants to understand what a passive material can—and cannot—do before considering powered equipment.
-directAnswer: Passive bedding changes the layers that form the bed microclimate without a powered control unit. Current active examples use a powered air unit or circulate temperature-controlled water through a pad. Their manufacturers document components and care that a simple layer change does not have; this site has not independently compared performance.
-uncertainty: Category descriptions do not predict how a specific product will perform in a particular room or for a particular sleeper.
+title: Unpowered Bedding Versus Powered Bed Cooling
+description: Bedding changes insulation without power. Air and water systems keep moving heat but add sound, parts, setup, and care.
+eyebrow: A layer change or a powered system
+audience: You are deciding whether a simple bed-layer change is enough.
+directAnswer: Removing or replacing bedding changes insulation without a motor or control unit. BedJet describes a powered air unit and hose; Sleepme describes temperature-controlled water circulating through a pad. Powered systems can keep running, but they also add components and care. Their manufacturer documents do not show that they will work better for a particular sleeper.
+uncertainty: A category cannot predict comfort in your room or bed. We have not tested specific products or compared their performance.
 applies:
-  - Simpler layer tests have identified a persistent bed-level constraint.
-  - Continuous local cooling is being compared with quieter passive changes.
-  - The household can evaluate noise and maintenance honestly.
+  - A bed-level problem remains after the room is comfortable.
+  - You can safely compare one removable layer first.
+  - Ongoing cooling may be worth sound, parts, cleaning, and cost.
 mayNotApply:
-  - The room-wide heat problem has not been addressed.
+  - The whole bedroom remains hot for both sleepers.
 observations:
-  - A passive layer test changes the bed stack without adding powered equipment.
-  - A current air example adds a unit, hose, nozzle, and optional divided sheet.
-  - A current water example adds a pad, control unit, water circuit, and cleaning instructions.
-experimentName: Establish the passive baseline
-experimentChange: Remove or replace one nonessential passive layer safely.
-experimentConstant: Keep room conditions and all powered devices unchanged.
+  - Whether changing one layer stops warmth from building.
+  - Whether the remaining problem needs cooling that continues through the night.
+  - Whether powered parts, sound, placement, and care are acceptable.
+experimentName: Test one removable layer first
+experimentChange: Remove or replace one nonessential bed layer safely for one night.
+experimentConstant: Leave room conditions, every other layer, and all powered devices unchanged.
 experimentSteps:
-  - Record whether heat still builds and whether moisture clears.
-  - Consider active mechanisms only if the one-variable passive result leaves a consistent constraint.
-doNotBuy: Do not pay for active cooling until a quiet, reversible passive-layer test shows what remains unsolved.
-safetyNote: Neither category should be represented as medical treatment for hot flashes or night sweats.
+  - Record whether warmth still builds and whether dampness changes.
+  - Consider powered systems only if the same bed-level problem remains.
+doNotBuy: If one quiet layer change works, powered cooling would only add equipment and upkeep.
+safetyNote: Neither unpowered bedding nor powered cooling should be presented as medical treatment for hot flashes or night sweats.
 sourceIds:
   [
     PMC-SLEEP-THERMAL-ENVIRONMENT-2012,
@@ -33,16 +33,16 @@ sourceIds:
   ]
 broaderLink:
   {
-    label: Decide whether active cooling is worth comparing,
+    label: Check whether powered cooling is worth comparing,
     href: /guides/is-active-bed-cooling-worth-it/,
   }
 nextLink:
   {
-    label: Compare first-touch with continuous heat removal,
+    label: Separate a brief cool touch from ongoing cooling,
     href: /compare/first-touch-vs-all-night-cooling/,
   }
 context: mechanisms
 published: '2026-09-07'
-reviewed: '2026-09-07'
+reviewed: '2026-09-08'
 indexable: true
 ---

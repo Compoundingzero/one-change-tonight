@@ -69,7 +69,7 @@ Publishing near-duplicate long-tail pages would weaken this system. Each page mu
 - Commission standardized hands-on tests before publishing any category ranking or “quietest” claim.
 - Pre-register a protocol for sound, ambient conditions, humidity, side isolation, maintenance, and sustained surface/under-cover behavior.
 - Seek independent credentialed medical review of safety/care wording; publish reviewer identity and scope only after review occurs.
-- If monetization is ever introduced, redesign disclosures and ranking governance before adding links. Do not silently change the current no-commission promise.
+- If monetization is ever introduced, redesign disclosures and ranking governance before adding links.
 
 ## Success signals
 
@@ -97,7 +97,7 @@ After launch, evaluate:
 | Risk                                       | Why it matters                                              | Control                                                                                            |
 | ------------------------------------------ | ----------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | Search pages drift into medical diagnosis  | Health intent and menopause context invite causal language  | Approved language boundary, authoritative sources, content validation, independent review later    |
-| Commercial pages become implicit rankings  | “Worth it” and vs. queries are purchase-near                | Mechanism-first tables, no winner, no affiliate links, visible noncommission statement             |
+| Commercial pages become implicit rankings  | “Worth it” and vs. queries are purchase-near                | Mechanism-first tables; no winner, retailer links, or unsupported performance claims               |
 | Scaled-content footprint                   | 25 phrases can tempt one URL each                           | 19 canonical jobs, six deliberate consolidations, canonical/internal-link discipline               |
 | Thin evidence for consumer bed systems     | Most comparisons are brand/editorial or small studies       | Label evidence type, avoid performance promises, publish unknowns                                  |
 | Privacy promise and implementation diverge | Health-adjacent answer data is sensitive                    | Local-only storage, no answer-bearing URLs, no third-party telemetry, repeat network/storage audit |
@@ -106,4 +106,4 @@ After launch, evaluate:
 
 ## Decision
 
-Proceed with the focused, noncommercial decision-aid architecture. Do not broaden into a menopause diagnosis product, symptom checker, generic sleep portal, or affiliate review site. The narrow boundary is both the trust strategy and the search differentiation.
+Proceed with the focused decision-aid architecture. Do not broaden into a menopause diagnosis product, symptom checker, generic sleep portal, or product-review site. The narrow boundary is both the trust strategy and the search differentiation.

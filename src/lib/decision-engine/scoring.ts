@@ -105,8 +105,8 @@ export const SCORE_RULES: readonly ScoreRule[] = [
   },
   {
     id: 'after-cold',
-    description: 'The sleeper became cold or shivery afterwards.',
-    clue: 'You became cold or shivery afterwards.',
+    description: 'The sleeper became cold or shivery afterward.',
+    clue: 'You became cold or shivery afterward.',
     when: (answers) => answers.after_episode === 'became_cold_or_shivery',
     contributions: { whole_room_heat: -2, sudden_personal_heat: 3 },
   },

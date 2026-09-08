@@ -24,18 +24,15 @@ export interface SourceRecord {
 export const sources: SourceRecord[] = [
   {
     id: 'OCT-METHOD-2026',
-    title: 'One Change Tonight deterministic experiment method',
+    title: 'How One Change Tonight chooses a change',
     publisher: 'One Change Tonight',
     url: '/methodology/',
     type: 'editorial',
     evidenceStatus: 'editorial_method',
     published: '2026-09-07',
     accessed: '2026-09-07',
-    supports: [
-      'One-variable editorial observation protocol',
-      'Deterministic experiment-selection rules',
-    ],
-    notes: 'Internal editorial method, not clinical evidence.',
+    supports: ['Trying one change at a time', 'Fixed rules that choose a change'],
+    notes: 'This site’s own method, not clinical evidence.',
   },
   {
     id: 'NHS-NIGHT-SWEATS-2026',
@@ -49,7 +46,7 @@ export const sources: SourceRecord[] = [
     supports: [
       'Definition of night sweats',
       'When repeated soaking night sweats merit medical advice',
-      'Environmental overheating distinction',
+      'Difference between night sweats and a hot bedroom',
     ],
   },
   {

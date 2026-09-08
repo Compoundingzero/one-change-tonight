@@ -1,29 +1,29 @@
 ---
 path: /compare/air-vs-water-bed-cooling/
 title: Air-Based Versus Water-Based Bed Cooling
-description: Current air-based examples move air through bedding; current water-based examples circulate water through a pad. Compare documented burdens without rankings.
-eyebrow: Active mechanism comparison
-audience: This comparison is for someone whose simpler experiments justify looking at active, one-sided bed cooling.
-directAnswer: Current manufacturer examples show two distinct configurations. An air-based example uses a powered unit, hose, nozzle, and optional divided sheet to move air through bedding. Water-based examples circulate temperature-controlled water through a mattress pad and add model-specific reservoir, hose, and cleaning instructions.
-uncertainty: Specifications and maintenance policies vary by manufacturer, and this site has not performed first-hand product tests.
+description: Compare where air and water systems make contact, the sound and feel they add, and the cleaning their current manuals require.
+eyebrow: Two ways to move heat from the bed
+audience: Lower-cost tests showed that heat or dampness remained around the bed.
+directAnswer: BedJet’s current installation guide describes a powered unit, hose, nozzle, and optional divided sheet that move air through bedding. Sleepme’s current product page and Dock Pro manual describe temperature-controlled water circulating through a mattress pad, with a reservoir, hose, water care, and cleaning. These are manufacturer descriptions, not independent performance findings.
+uncertainty: We have not tested either system. Sound, draft, surface feel, side coverage, cleaning, durability, and current model details may differ from the documentation.
 applies:
-  - A persistent one-sided or bed-surface constraint is already clear.
-  - Airflow sensation, sound, surface feel, and maintenance can be compared.
-  - No brand recommendation is needed.
+  - Heat or dampness remains around the bed after lower-cost changes.
+  - You can compare moving-air feel with direct contact on a pad.
+  - You are willing to check sound, placement, water care, and cleaning.
 mayNotApply:
-  - A simpler bedding or room experiment has not been tried.
+  - You have not yet tried a simpler bedding or room change.
 observations:
-  - An air example changes the air moving through bedding and has powered components.
-  - Water examples change the pad surface and specify water-system care.
-  - Current examples offer one-side or separately controlled configurations, but layouts vary.
-experimentName: Identify the mechanism constraint
-experimentChange: Decide whether the remaining problem is trapped air and moisture or persistent surface warmth.
-experimentConstant: Keep the sleep setup unchanged while documenting the decision.
+  - Whether you would feel moving air through bedding or lie on a water-filled pad.
+  - Where the unit, hose, nozzle, pad, and reservoir would fit.
+  - Which care tasks and shared parts the current manual lists.
+experimentName: Read the current manuals side by side
+experimentChange: Compare side coverage, sound-related parts, contact feel, water care, cleaning, and placement for the exact models.
+experimentConstant: Use the same household requirements for both systems and leave the brand decision open.
 experimentSteps:
-  - Record sound sensitivity, acceptable maintenance, desired side coverage, and contact-feel concerns.
-  - Verify current specifications directly with manufacturers before any purchase decision.
-doNotBuy: Do not choose water for stronger-sounding “cooling” or air for simplicity until the actual remaining constraint and household burden are clear.
-safetyNote: Mechanism fit is an editorial environmental interpretation, not evidence that either option treats night sweats.
+  - Write down which sensations, sounds, parts, and chores would be unacceptable.
+  - Verify every remaining specification in the current manufacturer manual before buying.
+doNotBuy: Choose neither category from the word “cooling” alone. First decide whether you accept moving air, a contact pad, and each system’s upkeep.
+safetyNote: These manufacturer documents describe equipment. They do not show that either system treats night sweats or another health condition.
 sourceIds:
   [
     PMC-SLEEP-THERMAL-ENVIRONMENT-2012,
@@ -33,12 +33,12 @@ sourceIds:
   ]
 broaderLink:
   {
-    label: Compare active with passive cooling first,
+    label: Check whether passive cooling is enough,
     href: /compare/passive-vs-active-bed-cooling/,
   }
-nextLink: { label: Bed fan or water-cooled pad?, href: /compare/bed-fan-vs-water-pad/ }
+nextLink: { label: Compare a bed fan with a water pad, href: /compare/bed-fan-vs-water-pad/ }
 context: mechanisms
 published: '2026-09-07'
-reviewed: '2026-09-07'
+reviewed: '2026-09-08'
 indexable: true
 ---

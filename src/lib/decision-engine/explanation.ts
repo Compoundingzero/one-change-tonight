@@ -13,6 +13,21 @@ interface RuleClue {
   readonly supports: readonly ScoredPattern[];
 }
 
+const directRuleClues: Readonly<Record<string, string>> = {
+  'wake-gradual': 'Heat built gradually.',
+  'wake-bed-warmer': 'The bed got hotter over time.',
+  'wake-room-hot': 'The whole bedroom felt hot.',
+  'wake-sudden': 'Heat came as a sudden wave.',
+  'wake-damp': 'You woke damp or soaked.',
+  'after-did-not-ease': 'The heat did not ease.',
+  'location-clammy': 'Your skin felt damp or clammy.',
+  'bed-changes-already-tried': 'You already tried a bedding or surface-cooling change.',
+};
+
+function ruleClue(rule: ScoreRule): string {
+  return directRuleClues[rule.id] ?? rule.clue;
+}
+
 function activeRuleClues(answers: AssessmentAnswers): readonly RuleClue[] {
   return SCORE_RULES.filter((rule) => rule.when(answers)).map((rule) => ({
     rule,
@@ -29,7 +44,7 @@ function patternClues(pattern: ScoredPattern, answers: AssessmentAnswers): strin
       (left, right) =>
         (right.rule.contributions[pattern] ?? 0) - (left.rule.contributions[pattern] ?? 0),
     )
-    .map(({ rule }) => rule.clue)
+    .map(({ rule }) => ruleClue(rule))
     .slice(0, 4);
 }
 
@@ -37,28 +52,28 @@ function neutralObservationClues(answers: AssessmentAnswers): string[] {
   const clues: string[] = [];
 
   if (answers.wake_experience === 'not_sure') {
-    clues.push('You selected “I’m not sure” for how the heat began.');
+    clues.push('You weren’t sure how the heat began.');
   }
   if (answers.co_sleeper_state === 'sleep_alone') {
-    clues.push('You reported sleeping alone.');
+    clues.push('You sleep alone.');
   } else if (answers.co_sleeper_state === 'not_sure') {
-    clues.push('You selected “I’m not sure” for the other sleeper’s experience.');
+    clues.push('You weren’t sure how the room felt to another sleeper.');
   }
   if (answers.after_episode === 'not_sure') {
-    clues.push('You selected “I’m not sure” for what happened after the episode.');
+    clues.push('You weren’t sure what happened after the heat eased.');
   }
   if (answers.heat_location === 'not_sure') {
-    clues.push('You selected “I’m not sure” for where the heat was strongest.');
+    clues.push('You weren’t sure where the heat felt strongest.');
   }
   if (answers.whole_room_cooling_effect === 'not_tried') {
-    clues.push('You selected that whole-room cooling had not been tried.');
+    clues.push('You have not tried cooling the whole room.');
   } else if (answers.whole_room_cooling_effect === 'not_sure') {
-    clues.push('You selected “I’m not sure” for the effect of whole-room cooling.');
+    clues.push('You weren’t sure whether cooling the whole room helped.');
   }
   if (answers.previous_attempts?.includes('nothing_yet') === true) {
-    clues.push('You reported that you have not tried an environmental change yet.');
+    clues.push('You have not tried a room, bed, or personal cooling change yet.');
   } else if (answers.previous_attempts?.includes('not_sure') === true) {
-    clues.push('You were not sure which environmental changes you had tried.');
+    clues.push('You weren’t sure which changes you had tried.');
   }
 
   return clues;
@@ -67,14 +82,11 @@ function neutralObservationClues(answers: AssessmentAnswers): string[] {
 function missingObservationClues(answers: AssessmentAnswers): string[] {
   const clues: string[] = [];
   const missing: ReadonlyArray<readonly [keyof AssessmentAnswers, string]> = [
-    ['wake_experience', 'No answer was recorded for how the heat began.'],
-    ['co_sleeper_state', 'No answer was recorded for the other sleeper’s experience.'],
-    ['after_episode', 'No answer was recorded for what happened after the episode.'],
-    ['heat_location', 'No answer was recorded for where the heat was strongest.'],
-    [
-      'whole_room_cooling_effect',
-      'No answer was recorded for the effect of whole-room cooling.',
-    ],
+    ['wake_experience', 'No answer yet about how the heat began.'],
+    ['co_sleeper_state', 'No answer yet about another sleeper.'],
+    ['after_episode', 'No answer yet about what happened after the heat eased.'],
+    ['heat_location', 'No answer yet about where the heat felt strongest.'],
+    ['whole_room_cooling_effect', 'No answer yet about whether cooling the room helped.'],
   ];
 
   for (const [key, clue] of missing) {
@@ -116,7 +128,7 @@ function mixedClues(answers: AssessmentAnswers): string[] {
     if (!selected.some(({ rule }) => rule.id === candidate.rule.id)) selected.push(candidate);
   }
 
-  const clues = selected.map(({ rule }) => rule.clue);
+  const clues = selected.map(({ rule }) => ruleClue(rule));
   for (const clue of [
     ...neutralObservationClues(answers),
     ...missingObservationClues(answers),
@@ -133,11 +145,11 @@ function mixedClues(answers: AssessmentAnswers): string[] {
 function uncertaintyNotes(answers: AssessmentAnswers): string[] {
   const notes: string[] = [];
   const labels: ReadonlyArray<readonly [keyof AssessmentAnswers, string]> = [
-    ['wake_experience', 'How the heat began remains uncertain.'],
-    ['co_sleeper_state', 'The other sleeper’s experience remains uncertain.'],
-    ['after_episode', 'What happened after the heat eased remains uncertain.'],
-    ['heat_location', 'Where the heat was concentrated remains uncertain.'],
-    ['whole_room_cooling_effect', 'The effect of whole-room cooling remains uncertain.'],
+    ['wake_experience', 'You weren’t sure how the heat began.'],
+    ['co_sleeper_state', 'You weren’t sure how the room felt to another sleeper.'],
+    ['after_episode', 'You weren’t sure what happened after the heat eased.'],
+    ['heat_location', 'You weren’t sure where the heat felt strongest.'],
+    ['whole_room_cooling_effect', 'You weren’t sure whether cooling the room helped.'],
   ];
 
   for (const [key, note] of labels) {
@@ -145,9 +157,7 @@ function uncertaintyNotes(answers: AssessmentAnswers): string[] {
   }
 
   if (notes.length === 0) {
-    notes.push(
-      'The observations describe comfort conditions, not the medical reason for the episode.',
-    );
+    notes.push('These answers describe what felt hot, not why it happened medically.');
   }
 
   return notes.slice(0, 3);
@@ -165,32 +175,30 @@ export function buildExplanation(
 
   switch (primaryPattern) {
     case 'whole_room_heat':
-      title = 'The whole room appears to be contributing';
-      interpretation =
-        'Your answers fit a pattern in which shared room conditions are a useful first environmental question.';
+      title = 'Start with the room';
+      interpretation = 'Your answers point most strongly to the shared room.';
       clues = patternClues('whole_room_heat', answers);
       break;
     case 'bed_heat_build_up':
-      title = 'Heat may be accumulating around the bed';
-      interpretation =
-        'Your answers make one removable bed or bedding layer a useful first variable to examine.';
+      title = 'Start with one bed layer';
+      interpretation = 'Your answers point most strongly to heat building around the bed.';
       clues = patternClues('bed_heat_build_up', answers);
       break;
     case 'sudden_personal_heat':
-      title = 'The observations lean toward heat concentrated around you';
+      title = 'The heat may be more local than room-wide';
       interpretation =
-        'A sudden or localized personal-heat pattern is a useful first environmental question; room conditions may still contribute.';
+        'Your answers point to a change on your side before more whole-room cooling.';
       clues = patternClues('sudden_personal_heat', answers);
       break;
     case 'mixed_or_uncertain':
       title =
         clarity === 'not_enough_information'
           ? 'There is not enough information yet'
-          : 'More than one pattern may be involved';
+          : 'Your answers point in different directions';
       interpretation =
         clarity === 'not_enough_information'
-          ? 'A baseline night can provide a more useful next observation than a speculative recommendation.'
-          : 'The answers conflict or support more than one environmental pattern, so the tool will not force a conclusion.';
+          ? 'Keep your usual setup for one night and record what happens before choosing a change.'
+          : 'Don’t guess. Keep your usual setup for one night and record what happens.';
       clues = mixedClues(answers);
       break;
   }
@@ -204,9 +212,7 @@ export function buildExplanation(
     answers.after_episode === 'became_cold_or_shivery' &&
     clues.length < 4
   ) {
-    clues.push(
-      'You explicitly reported both dampness and becoming cold or shivery afterwards.',
-    );
+    clues.push('You said you woke damp and later felt cold or shivery.');
   }
 
   return {
@@ -215,6 +221,6 @@ export function buildExplanation(
     clues: clues.slice(0, 4),
     uncertainty: uncertaintyNotes(answers),
     doesNotEstablish:
-      'This pattern cannot determine the medical cause. Environmental cooling may affect comfort without treating the underlying reason for the episode.',
+      'This result does not explain why the heat happened. Cooling may change comfort, but it cannot identify or treat a medical cause.',
   };
 }

@@ -14,23 +14,23 @@ export default function AwakeAndHot() {
 
   const roomAction =
     room === 'whole_room' && partner === 'also_hot'
-      ? 'Use the smallest safe room or ventilation change already available.'
+      ? 'Make one small room or ventilation change you already use safely.'
       : room === 'whole_room'
-        ? 'The room feels hot but the experience is not clearly shared, so keep any change small and local for now.'
+        ? 'Don’t cool the whole room much more. Try one small change on your side.'
         : room === 'mainly_me'
-          ? 'Keep the shared room stable and use one familiar local comfort measure on your side.'
-          : 'Make no broad room change yet; use only a familiar comfort measure and notice whether the room also feels hot.';
+          ? 'Leave the room as it is. Use one cooling step you already use safely, on your side only.'
+          : 'Don’t change the whole room yet. Use one cooling step you already use safely, then notice whether the room feels hot too.';
   const partnerAction =
     partner === 'also_hot'
-      ? 'Keep bedding and personal measures unchanged so the shared-room observation stays interpretable.'
+      ? 'Leave bedding and personal cooling unchanged tonight so you can tell whether your one change helped.'
       : partner === 'comfortable_or_cold'
-        ? 'Keep the other sleeper’s side unchanged and direct any local change only to your side.'
-        : 'Keep the usual sleep setup as stable as practical while you make the single change.';
+        ? 'Leave the other sleeper’s side as it is. Keep your change on your side.'
+        : 'Leave the rest of your sleep setup as it is.';
   const timingAction =
     timing === 'sudden'
       ? 'Use the change only while the heat is present, then stop before you become too cold.'
       : timing === 'gradual'
-        ? 'If safe, remove or replace only the lightest nonessential top layer and keep every other variable unchanged.'
+        ? 'If safe, remove only the lightest top layer. Leave everything else as it is.'
         : 'Notice whether the heat passes quickly or builds; do not assume the room explains it.';
   const actions = [roomAction, partnerAction, timingAction];
 
@@ -88,7 +88,7 @@ export default function AwakeAndHot() {
     return (
       <section class="awake-result" aria-live="polite">
         <p class="eyebrow">A small action for right now</p>
-        <h2>Change one thing, then let the night be simple.</h2>
+        <h2>Try one small change now.</h2>
         <ol>
           {actions.map((action) => (
             <li key={action}>{action}</li>
@@ -98,13 +98,16 @@ export default function AwakeAndHot() {
           <strong>Stop</strong> if the change makes you too cold, causes breathing irritation,
           feels unsafe, or disturbs either sleeper more than it helps.
         </p>
-        <p>This may affect comfort. It cannot explain or treat the reason the heat occurred.</p>
+        <p>
+          These steps may make you more comfortable. They cannot explain why the heat happened
+          or identify or treat a medical cause.
+        </p>
         <div class="awake-actions">
           <button type="button" class="button" onClick={saveMorningNote}>
-            Save a private morning reminder
+            Save a reminder for morning
           </button>
           <a class="button secondary" href="/tool/">
-            Take the full assessment when ready
+            Open the full assessment
           </a>
         </div>
         {saveStatus === 'saved' && <p role="status">Reminder saved in this browser only.</p>}

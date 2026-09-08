@@ -2,32 +2,55 @@
 import { sourceById } from '@/data/sources/sources';
 interface Props {
   ids: string[];
+  compact?: boolean;
 }
-const { ids } = Astro.props;
+const { ids, compact = false } = Astro.props;
 const missing = ids.filter((id) => !sourceById.has(id));
 if (missing.length) throw new Error(`Unregistered source IDs: ${missing.join(', ')}`);
 const records = ids.map((id) => sourceById.get(id)!);
+const evidenceLabels = {
+  official_guidance: 'Official guidance',
+  evidence_synthesis: 'Research review',
+  first_party_technical: 'Official technical documentation',
+  manufacturer_documentation: 'Manufacturer documentation',
+  editorial_method: 'This site’s method',
+} as const;
 ---
 
 <section id="sources" class="sources">
   <h2>Sources</h2>
-  <p>Sources are selected for the claims on this page. Accessed September 7, 2026.</p>
+  <p>
+    {
+      compact
+        ? 'References for this page.'
+        : 'Access dates and how each source is used. Limits are noted where they matter.'
+    }
+  </p>
   <ol>
     {
       records.map((source) => (
-        <li>
+        <li id={compact ? undefined : source.id}>
           <a href={source.url} rel="external noopener">
             {source.title}
           </a>
           . {source.publisher}.
           <span>
-            Source type: {source.type}. Evidence status:{' '}
-            {source.evidenceStatus.replaceAll('_', ' ')}.{' '}
-            {source.published ? `Published ${source.published}. ` : ''}
-            {source.updated ? `Updated ${source.updated}. ` : ''}Accessed {source.accessed}.
+            {evidenceLabels[source.evidenceStatus]}.
+            {compact ? (
+              <>
+                {' '}
+                <a href={`/sources/#${source.id}`}>Use and details</a>.
+              </>
+            ) : (
+              <>
+                {' '}
+                {source.published ? `Published ${source.published}. ` : ''}
+                {source.updated ? `Updated ${source.updated}. ` : ''}Accessed {source.accessed}.
+              </>
+            )}
           </span>
-          <span>Supports: {source.supports.join('; ')}.</span>
-          {source.notes && <span>Limit: {source.notes}</span>}
+          {!compact && <span>Used here for: {source.supports.join('; ')}.</span>}
+          {!compact && source.notes && <span>Limit: {source.notes}</span>}
         </li>
       ))
     }

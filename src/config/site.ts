@@ -77,7 +77,6 @@ const schema = z.object({
   bingVerification: z.string(),
   indexNowKey: z.string(),
   gptBotPolicy: z.enum(['allow', 'disallow']),
-  fundingDisclosure: z.string().min(1),
 });
 
 const raw = {
@@ -85,8 +84,7 @@ const raw = {
   siteName: import.meta.env.PUBLIC_SITE_NAME ?? 'One Change Tonight',
   toolName: 'Find tonight’s change',
   siteUrl: import.meta.env.PUBLIC_SITE_URL ?? 'https://example.invalid',
-  organizationName:
-    import.meta.env.PUBLIC_ORGANIZATION_NAME ?? 'One Change Tonight editorial team',
+  organizationName: import.meta.env.PUBLIC_ORGANIZATION_NAME ?? 'One Change Tonight team',
   legalOwnerName: import.meta.env.PUBLIC_LEGAL_OWNER_NAME ?? 'OWNER_SETUP_REQUIRED',
   contactEmail: import.meta.env.PUBLIC_CONTACT_EMAIL ?? 'owner@example.invalid',
   jurisdiction: import.meta.env.PUBLIC_JURISDICTION ?? 'OWNER_SETUP_REQUIRED',
@@ -99,15 +97,13 @@ const raw = {
     .map((value) => value.trim())
     .filter(Boolean),
   evidenceReviewLabel:
-    'Editorial evidence review completed. Not independently medically reviewed.',
+    'We reviewed these sources. No clinician has independently reviewed this site.',
   analyticsEnabled: import.meta.env.PUBLIC_ANALYTICS_ENABLED === 'true',
   analyticsProviderId: import.meta.env.PUBLIC_ANALYTICS_PROVIDER_ID ?? '',
   googleVerification: import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION ?? '',
   bingVerification: import.meta.env.PUBLIC_BING_SITE_VERIFICATION ?? '',
   indexNowKey: import.meta.env.PUBLIC_INDEXNOW_KEY ?? '',
   gptBotPolicy: import.meta.env.PUBLIC_GPTBOT_POLICY === 'allow' ? 'allow' : 'disallow',
-  fundingDisclosure:
-    'We currently receive no commission from the products or product categories discussed.',
 } as const;
 
 export const siteConfig = schema.parse(raw);

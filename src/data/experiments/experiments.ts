@@ -26,11 +26,11 @@ const THERMAL_COMFORT_SOURCE = 'PMC-SLEEP-THERMAL-ENVIRONMENT-2012';
 export const EXPERIMENTS = [
   {
     id: 'measure_first',
-    plainLanguageName: 'Measure first for one baseline night',
+    plainLanguageName: 'Record one baseline night',
     patternFit: ['mixed_or_uncertain'],
-    purpose: 'Collect one clearer baseline before choosing an environmental change.',
+    purpose: 'Get a clearer picture before changing the room or bed.',
     oneVariableToChange:
-      'Change only what you record: note where the heat was felt, whether it arrived suddenly or gradually, and whether the room or another sleeper also felt hot.',
+      'Keep your usual setup for one night. Record where you felt the heat, whether it came suddenly or gradually, and whether the room or another sleeper also felt hot.',
     keepConstant: [
       'Usual thermostat setting',
       'Usual bedding and sleepwear',
@@ -45,7 +45,7 @@ export const EXPERIMENTS = [
       'Whether heat arrived suddenly or built gradually',
       'Whether the bed or whole room felt hot',
       'Whether another sleeper was hot, comfortable, or cold',
-      'Whether dampness or feeling cold afterwards occurred, and how long each lasted',
+      'Whether dampness or feeling cold afterward occurred, and how long each lasted',
     ],
     stopConditions: [
       'Stop the observation and use your normal comfort measures if remaining unchanged is uncomfortable.',
@@ -55,7 +55,7 @@ export const EXPERIMENTS = [
     evidenceLevel: 'editorial_observation_protocol',
     sourceIds: [EDITORIAL_METHOD_SOURCE],
     nextIfHelps:
-      'Use the clearest new observation to choose one room-, bed-, moisture-, or personal-comfort experiment.',
+      'Use the clearest new observation to choose a change to the room, bed, damp layer, or your side.',
     nextIfNot:
       'Keep the result uncertain and discuss repeated or concerning symptoms with a qualified healthcare professional.',
   },
@@ -63,10 +63,9 @@ export const EXPERIMENTS = [
     id: 'observe_room_and_both_sleepers',
     plainLanguageName: 'Check the room and both sleepers for one night',
     patternFit: ['whole_room_heat', 'mixed_or_uncertain'],
-    purpose:
-      'Find out whether the whole room and both sleepers are uncomfortable at the same time.',
+    purpose: 'Find out whether the room and both sleepers feel hot at the same time.',
     oneVariableToChange:
-      'Change only the observation: record the room conditions and each sleeper’s comfort before changing another cooling variable.',
+      'Before making another cooling change, record the room conditions and how each sleeper felt.',
     keepConstant: ['Bedding layers', 'Personal cooling', 'Usual thermostat and fan settings'],
     steps: [
       'Use an existing temperature or humidity display only if one is already available.',
@@ -88,7 +87,7 @@ export const EXPERIMENTS = [
     nextIfHelps:
       'If both sleepers and the room were hot together, compare one modest whole-room adjustment next.',
     nextIfNot:
-      'If only one sleeper was hot, move to a local or one-sided experiment instead of cooling the room further.',
+      'If only one sleeper was hot, try a change on that side instead of cooling the room further.',
   },
   {
     id: 'change_one_bed_layer',
@@ -125,15 +124,15 @@ export const EXPERIMENTS = [
     nextIfHelps:
       'If improvement was consistent across the three nights, decide whether to keep this one-layer setup or compare one other variable.',
     nextIfNot:
-      'Restore the layer and examine the next removable layer or a different environmental pattern before replacing the mattress.',
+      'Restore the layer and check the next removable layer or another part of the room or bed before replacing the mattress.',
   },
   {
     id: 'directed_side_airflow',
     plainLanguageName: 'Direct existing airflow across one side',
     patternFit: ['sudden_personal_heat', 'bed_heat_build_up'],
-    purpose: 'Test fast, local, reversible comfort without cooling the entire room further.',
+    purpose: 'Try a quick change on one side without cooling the whole room more.',
     oneVariableToChange:
-      'Use an existing fan on the lowest useful setting, directed across only your side.',
+      'Use an existing fan at the lowest setting that changes how it feels, directed across only your side.',
     keepConstant: [
       'Thermostat setting',
       'Bedding layers',
@@ -142,12 +141,12 @@ export const EXPERIMENTS = [
     ],
     steps: [
       'Use only a fan that is already available.',
-      'Choose the lowest useful setting.',
+      'Choose the lowest setting that changes how it feels.',
       'Aim airflow across your side rather than directly at the other sleeper.',
     ],
     whatToRecord: [
       'How quickly comfort changed',
-      'Whether you became cold afterwards',
+      'Whether you became cold afterward',
       'Whether noise or airflow disturbed either sleeper',
     ],
     stopConditions: [
@@ -177,7 +176,7 @@ export const EXPERIMENTS = [
     steps: [
       'Choose existing covers that let each sleeper keep a comfortable amount of insulation.',
       'Keep the covers on their respective sides.',
-      'Do not change another room or bed variable that night.',
+      'Do not change anything else in the room or bed that night.',
     ],
     whatToRecord: [
       'Whether each sleeper stayed comfortable',
@@ -191,8 +190,7 @@ export const EXPERIMENTS = [
     sourceIds: [EDITORIAL_METHOD_SOURCE, THERMAL_COMFORT_SOURCE],
     nextIfHelps:
       'If both sleepers were consistently more comfortable, keep the same separate-cover arrangement or stop with what worked.',
-    nextIfNot:
-      'Restore the shared cover and compare another one-sided mechanism without blaming either sleeper.',
+    nextIfNot: 'Restore the shared cover and try a different change on one side.',
   },
   {
     id: 'prepare_one_dry_layer',
@@ -208,7 +206,7 @@ export const EXPERIMENTS = [
       'mixed_or_uncertain',
     ],
     purpose:
-      'Observe whether comfort differs after changing one damp item, without assuming the change will shorten recovery.',
+      'See whether changing one damp item affects comfort. It cannot show that a dry layer makes recovery faster.',
     oneVariableToChange:
       'After waking damp, replace only one damp sleepwear item or safely removable bedding layer with a dry equivalent.',
     keepConstant: [
@@ -225,46 +223,47 @@ export const EXPERIMENTS = [
     whatToRecord: [
       'Dry, damp, or soaked',
       'Time needed to become comfortable',
-      'Whether you became cold afterwards',
+      'Whether you became cold afterward',
     ],
     stopConditions: [
       'Stop if changing the item makes you too cold or creates an unsafe need to move around while unsteady.',
     ],
     safetyNote:
-      'This experiment concerns recovery and comfort only. It does not claim to prevent night sweats or explain their medical cause.',
+      'This is only for comfort after waking. It cannot prevent night sweats or explain their medical cause.',
     evidenceLevel: 'editorial_observation_protocol',
     sourceIds: [EDITORIAL_METHOD_SOURCE],
     nextIfHelps:
-      'If comfort differed consistently across the recorded nights, keep one dry replacement available as an optional recovery step without treating it as a medical conclusion.',
+      'If the dry item felt better across the recorded nights, keep one nearby without treating that result as proof of a medical effect.',
     nextIfNot:
-      'Return to the usual setup and examine whether room, bed, or local airflow conditions are more informative.',
+      'Return to the usual setup and check whether the room, bed, or local airflow gives you a clearer answer.',
   },
   {
     id: 'local_comfort_during_episode',
-    plainLanguageName: 'Use one local comfort measure when heat begins',
+    plainLanguageName: 'Use one cooling step when heat begins',
     patternFit: ['sudden_personal_heat', 'mixed_or_uncertain'],
-    purpose: 'Test personal, reversible comfort without cooling the whole bedroom further.',
-    oneVariableToChange: 'Use one existing local comfort measure only when the episode begins.',
+    purpose: 'Try one small cooling step without cooling the whole bedroom more.',
+    oneVariableToChange:
+      'Use one cooling step you already use safely, only when the heat begins.',
     keepConstant: ['Room temperature', 'Bedding', 'Sleepwear', 'The other sleeper’s setup'],
     steps: [
-      'Choose one familiar local measure that does not require a purchase.',
+      'Choose one cooling step you already use safely that does not require a purchase.',
       'Use only that measure when the heat begins.',
       'Stop the measure when comfort returns rather than cooling the room further.',
     ],
     whatToRecord: [
       'How quickly comfort changed',
-      'Whether you became cold afterwards',
+      'Whether you became cold afterward',
       'Whether the other sleeper was disturbed',
     ],
     stopConditions: ['Stop if the measure causes discomfort, irritation, or excessive cold.'],
     safetyNote:
-      'Use only a familiar, low-risk comfort measure. Personal cooling may affect comfort without treating the underlying reason for an episode.',
+      'Use only a cooling step you already know is safe. It may affect comfort without treating the underlying reason for an episode.',
     evidenceLevel: 'editorial_observation_protocol',
     sourceIds: [EDITORIAL_METHOD_SOURCE, THERMAL_COMFORT_SOURCE],
     nextIfHelps:
-      'If the same familiar measure helped consistently without creating another problem, keep it as an optional comfort step; no escalation is needed.',
+      'If the same step helped consistently without creating another problem, keep it as an optional comfort step and stop there.',
     nextIfNot:
-      'Do not escalate immediately to an expensive system; measure first or compare a different environmental mechanism.',
+      'Do not move straight to an expensive system. Record a baseline night or try a different change to the room, bed, or your side.',
   },
 ] as const satisfies readonly ExperimentDefinition[];
 

@@ -1,29 +1,29 @@
 ---
 path: /compare/first-touch-vs-all-night-cooling/
-title: Cool to the Touch Versus Continuous Heat Removal
-description: A cool first contact and sustained heat movement are not the same promise. Match the claim to when the discomfort actually appears.
-eyebrow: Timing changes the mechanism
-audience: This comparison is for someone whose bedding feels cool on contact but becomes warm later in the night.
-directAnswer: “Cool to the touch” describes an initial sensation, while an active manufacturer claim may describe powered air or water circulation over time. Those are different categories of claim. Neither phrase alone demonstrates all-night comfort for a particular sleeper, so compare when discomfort actually returns.
-uncertainty: Marketing terms are not standardized enough to predict all-night performance, and this site has not independently tested individual products.
+title: Cool to the Touch Versus Cooling That Keeps Running
+description: A cool first contact and powered heat movement over time are different claims. Check when the bed becomes uncomfortable.
+eyebrow: The timing changes what to compare
+audience: The bed feels cool at first but becomes warm later.
+directAnswer: “Cool to the touch” describes the first sensation when skin meets a material. BedJet and Sleepme describe powered air or water circulation that continues over time. Those claims refer to different things, and neither proves that a particular sleeper will stay comfortable all night. The question is when warmth returns.
+uncertainty: Marketing terms are not standardized enough to predict a night’s result, and we have not tested the products that use them.
 applies:
-  - Comfort is good at bedtime and worsens after sustained contact.
-  - A cooling sheet or surface feels cool only at first.
-  - You are comparing a passive sensation with an active mechanism.
+  - The surface feels cool when you lie down but warmer later.
+  - Discomfort appears after sustained contact.
+  - You are comparing a material claim with powered circulation.
 mayNotApply:
-  - The room and bed are already hot before you lie down.
+  - The room and bed already feel hot before you lie down.
 observations:
-  - First contact is cool but later contact is neutral or warm.
-  - Heat build-up timing matters more than label language.
-  - Moisture movement may be distinct from heat movement.
-experimentName: Record when the cool feeling ends
-experimentChange: Note the first time the bed feels persistently warm without changing any setup.
-experimentConstant: Keep every room, bedding, and sleepwear variable at baseline.
+  - About how long the first cool sensation lasts.
+  - Whether warmth returns under your body, under the covers, or throughout the room.
+  - Whether dampness changes separately from surface warmth.
+experimentName: Note when the bed stops feeling cool
+experimentChange: Use the normal setup and record the first time the bed feels persistently warm.
+experimentConstant: Leave the room, bedding, and sleepwear at their usual settings.
 experimentSteps:
-  - Separate bedtime surface feel from any later awakening.
-  - Use the timeline to decide whether a first-touch claim addresses the real need.
-doNotBuy: Do not assume another cool-to-touch layer will provide all-night heat removal when the problem begins hours after first contact.
-safetyNote: Product-mechanism language concerns comfort and must not be interpreted as treatment evidence.
+  - Record the first-contact sensation separately from any later awakening.
+  - Use the timing to judge whether a first-touch claim addresses the part of the night that bothers you.
+doNotBuy: Another cool-to-touch layer may repeat the same brief sensation. First find out whether the problem begins minutes or hours after contact.
+safetyNote: Product wording describes comfort claims. It is not evidence that a product treats night sweats or another health condition.
 sourceIds:
   [
     PMC-SLEEP-THERMAL-ENVIRONMENT-2012,
@@ -34,13 +34,16 @@ sourceIds:
   ]
 broaderLink:
   {
-    label: Why might cooling sheets stop feeling cool?,
+    label: Troubleshoot sheets that stop feeling cool,
     href: /failed-fixes/cooling-sheets-not-working/,
   }
 nextLink:
-  { label: Passive or active bed cooling?, href: /compare/passive-vs-active-bed-cooling/ }
+  {
+    label: Compare unpowered layers with powered cooling,
+    href: /compare/passive-vs-active-bed-cooling/,
+  }
 context: failed-fix
 published: '2026-09-07'
-reviewed: '2026-09-07'
+reviewed: '2026-09-08'
 indexable: true
 ---

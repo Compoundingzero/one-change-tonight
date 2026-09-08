@@ -1,39 +1,39 @@
 ---
 path: /failed-fixes/whole-room-cooling-failed/
-title: Why Whole-Room Cooling Can Fail When Only One Sleeper Is Hot
-description: Whole-room cooling changes conditions for both sleepers. A local test may be more useful when one side needs a different environment.
-eyebrow: Shared room, local constraint
-audience: This page is for couples whose thermostat change left one person cold and the other still waking hot.
-directAnswer: Air conditioning or a lower thermostat acts on the whole bedroom. If only one sleeper needs stronger cooling, the shared room may reach the cold partner’s limit before it changes the hot sleeper’s bed microclimate enough to help.
-uncertainty: Whole-room cooling can still contribute, and a local mismatch does not identify why one person experiences heat.
+title: Why Room Cooling Can Fail When Only One Sleeper Is Hot
+description: Find out whether the colder room reached your partner before it changed the heat around your side of the bed.
+eyebrow: When a colder room does not help
+audience: Cooling the bedroom made one person cold while the other still woke hot.
+directAnswer: Air conditioning and thermostats change the whole bedroom. If one sleeper still feels hot after the room cools, check whether warmth is held under that person’s covers or whether heat arrives suddenly around that person. More room cooling may reach the other sleeper’s limit without addressing either problem.
+uncertainty: Room temperature may still play a part. A failed room change only shows that making the whole bedroom colder did not solve the night.
 applies:
-  - A partner became cold when the thermostat was lowered.
-  - The hot sleeper’s side or covers feel warmer than the room.
-  - The room is otherwise reasonably comfortable.
+  - The other sleeper became cold when the room was cooled.
+  - Heat stayed around one side or under one set of covers.
+  - The room itself felt comfortable or cool.
 mayNotApply:
-  - Both sleepers report persistent room heat.
+  - Both sleepers still report that the whole room is hot.
 observations:
-  - Cooling the room affects the partner more than the waking pattern.
-  - Heat remains concentrated on one side.
-  - The thermostat change did not shorten moisture recovery.
-experimentName: Separate insulation between sleepers
-experimentChange: Use separate existing top covers for one night.
-experimentConstant: Keep thermostat, fan, sleepwear, and mattress layers unchanged.
+  - Whether the room feels cool when you step out from under the covers.
+  - Whether the other sleeper notices the same heat at the same time.
+  - Whether your heat built slowly in bed or arrived suddenly.
+experimentName: Hold the room steady and change one top cover
+experimentChange: Keep the room at the tolerable setting and use a lighter existing top cover on only the warmer side.
+experimentConstant: Leave the thermostat, fan, sleepwear, and lower bed layers unchanged.
 experimentSteps:
-  - Give the cold-sensitive sleeper enough insulation while reducing only the hot sleeper’s removable top layer.
-  - Record comfort and disturbance for both sleepers.
-doNotBuy: Do not buy a larger whole-room unit when the unresolved requirement is different conditions on each side of one bed.
-safetyNote: A one-sided requirement concerns thermal comfort; it cannot determine the medical cause of one sleeper’s episodes.
+  - Give the cold sleeper enough familiar insulation while changing only the warmer side’s top cover.
+  - In the morning, compare heat, cold, and disturbance for both people.
+doNotBuy: A larger room unit will not target one side of a shared bed. First check whether one top-cover change reaches the heat that room cooling missed.
+safetyNote: A local result describes comfort only. It cannot explain the medical cause of one sleeper’s heat or sweating.
 sourceIds: [PMC-SLEEP-THERMAL-ENVIRONMENT-2012, NHS-NIGHT-SWEATS-2026]
 broaderLink:
-  { label: Compare cooling the bed and bedroom, href: /compare/cooling-bed-vs-bedroom/ }
+  { label: Compare the bed with the whole bedroom, href: /compare/cooling-bed-vs-bedroom/ }
 nextLink:
   {
-    label: Build a plan for different sleep temperatures,
+    label: Agree on a setup for different sleep temperatures,
     href: /guides/different-sleep-temperatures/,
   }
 context: partner-temperature
 published: '2026-09-07'
-reviewed: '2026-09-07'
+reviewed: '2026-09-08'
 indexable: true
 ---

@@ -20,6 +20,14 @@ const sitemapArticles = isSitemap
 const issueUrl = `${siteConfig.repositoryUrl}/issues/new`;
 const contactUrl =
   siteConfig.contactMethod === 'email' ? `mailto:${siteConfig.contactEmail}` : issueUrl;
+const showToolInvite =
+  page.path.startsWith('/patterns/') ||
+  [
+    '/how-it-works/',
+    '/room-bed-body-partner/',
+    '/three-night-experiment/',
+    '/compare/',
+  ].includes(page.path);
 ---
 
 <BaseLayout title={page.title} description={page.description} article>
@@ -119,18 +127,21 @@ const contactUrl =
       )
     }
     <ClaimEvidence route={page.path} />
-    <p class="funding">
-      We currently receive no commission from the products or product categories discussed.
-    </p>
     {page.sourceIds && <SourceList ids={page.sourceIds} />}
-    <aside class="panel next">
-      <h2>Find the next useful change</h2>
-      <p>
-        Answer only the environmental questions that can change the plan. No account. No name.
-        Your answers stay in this browser.
-      </p>
-      <a class="button" href="/tool/">Find tonight’s change</a>
-    </aside>
+    {
+      showToolInvite && (
+        <aside class="panel next">
+          <h2>Try the assessment</h2>
+          <p>
+            Answer a short set of questions about the room, bed, timing, moisture, and other
+            sleeper. Your answers stay in this browser.
+          </p>
+          <a class="button" href="/tool/">
+            Find tonight’s change
+          </a>
+        </aside>
+      )
+    }
   </article>
 </BaseLayout>
 <style>
@@ -162,11 +173,6 @@ const contactUrl =
     background: var(--paper-raised);
     border: 1px solid var(--line);
     border-radius: var(--radius-md);
-  }
-  .funding {
-    margin-top: var(--space-7);
-    color: var(--ink-650);
-    font-size: 0.9rem;
   }
   .next {
     margin-top: var(--space-7);

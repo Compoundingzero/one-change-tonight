@@ -95,8 +95,8 @@ export function selectDoNotBuyGuidance(
   if (primaryPattern === 'mixed_or_uncertain') {
     return {
       id: 'do_not_choose_active_system_yet',
-      title: 'Do not choose an active system yet',
-      body: 'Collect one clearer baseline before accepting extra noise, cleaning, parts, maintenance, or expense.',
+      title: 'Do not buy a powered cooling system yet',
+      body: 'First record one baseline night without changing your usual setup. Powered cooling can add noise, cleaning, parts, upkeep, and cost.',
     };
   }
 
@@ -112,7 +112,7 @@ export function selectDoNotBuyGuidance(
     return {
       id: 'do_not_escalate_room_cooling_yet',
       title: 'Do not add stronger whole-room cooling yet',
-      body: 'When only one side needs a different environment, a local experiment can teach you more without making the other sleeper colder.',
+      body: 'If only one side needs cooling, try a change on that side without making the other sleeper colder.',
     };
   }
 
@@ -120,7 +120,7 @@ export function selectDoNotBuyGuidance(
     return {
       id: 'do_not_repeat_cool_to_touch_yet',
       title: 'Do not assume another cool-to-touch layer will last all night',
-      body: 'First-touch coolness and continuous heat removal are different constraints. Test the bed setup before repeating the same mechanism.',
+      body: 'Feeling cool at first is not the same as removing heat all night. Test the bed setup before trying the same approach again.',
     };
   }
 
@@ -128,14 +128,14 @@ export function selectDoNotBuyGuidance(
     return {
       id: 'do_not_buy_dual_zone_yet',
       title: 'Do not pay for dual-zone control yet',
-      body: 'If both sleepers want the same conditions, first test whether one ordinary room change addresses the shared constraint.',
+      body: 'If both sleepers want the same temperature, first try one ordinary room change.',
     };
   }
 
   return {
     id: 'do_not_choose_active_system_yet',
-    title: 'Do not choose an active system yet',
-    body: 'Collect one clearer baseline before accepting extra noise, cleaning, parts, maintenance, or expense.',
+    title: 'Do not buy a powered cooling system yet',
+    body: 'First record one baseline night without changing your usual setup. Powered cooling can add noise, cleaning, parts, upkeep, and cost.',
   };
 }
 
@@ -149,10 +149,9 @@ export function determinePremiumFit(
     return {
       fit: 'premium_active_cooling_not_yet_justified',
       reasons: [
-        'A clearer environmental pattern is needed before comparing a premium mechanism.',
+        'Your answers do not yet show whether the room, bed, or one side should change.',
       ],
-      caveat:
-        'This is not a product recommendation. Measure first rather than treating uncertainty as a premium fit signal.',
+      caveat: 'Uncertainty is not a reason to buy a powered system.',
     };
   }
 
@@ -175,9 +174,10 @@ export function determinePremiumFit(
   if (!comparisonFit) {
     return {
       fit: 'premium_active_cooling_not_yet_justified',
-      reasons: ['A lower-burden experiment can still clarify the environmental constraint.'],
-      caveat:
-        'This is not a product recommendation. It says only that a premium comparison is premature.',
+      reasons: [
+        'A simpler test can help you decide whether to change the room, bed, or one side.',
+      ],
+      caveat: 'Try the simpler change before comparing powered cooling.',
     };
   }
 
@@ -185,7 +185,7 @@ export function determinePremiumFit(
     'Sleep disruption is frequent.',
     'Only one side appears to need stronger cooling.',
     'Whole-room cooling did not solve the problem or made the other sleeper too cold.',
-    'At least two lower-burden approaches have already been tried.',
+    'At least two simpler or lower-cost changes have already been tried.',
   ];
 
   if (preferences.acceptsNoiseMaintenanceAndExpense === true) {
@@ -193,7 +193,7 @@ export function determinePremiumFit(
       fit: 'personal_or_dual_zone_active_system_fits_environmental_constraint',
       reasons,
       caveat:
-        'This describes mechanism fit only. Compare noise, maintenance, moisture, complexity, and expense; it is not an instruction to purchase.',
+        'Powered cooling may offer control on one side, but check noise, cleaning, upkeep, moisture, parts, and cost before deciding.',
     };
   }
 
@@ -201,7 +201,7 @@ export function determinePremiumFit(
     fit: 'active_one_sided_system_may_be_worth_comparing',
     reasons,
     caveat:
-      'Comparison is optional. Confirm tolerance for possible noise, maintenance, and expense before treating an active system as a fit.',
+      'Comparing is optional. Decide whether noise, cleaning, upkeep, and cost are acceptable before considering powered cooling.',
   };
 }
 
@@ -235,6 +235,6 @@ export function buildCareReminder(
     show: reasons.length > 0,
     reasons,
     message:
-      'This tool examines the sleep environment and what you can test for comfort. It cannot identify the medical cause of night sweats. New, worsening, frequent, severe, or concerning symptoms deserve a conversation with a qualified healthcare professional. Seek urgent help if you feel seriously unwell.',
+      'This tool looks only at the sleep environment and comfort. It cannot explain the medical cause of night sweats. Talk with a qualified healthcare professional if symptoms are new, worsening, frequent, severe, soaking, or concerning. Seek urgent help if you feel seriously unwell.',
   };
 }

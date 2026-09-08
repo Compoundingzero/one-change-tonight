@@ -15,5 +15,5 @@
 - [ ] `pnpm owner:setup -- --check` passes.
 - [ ] Final domain resolves to the exact tested artifact.
 - [ ] Production pages are indexable, have correct self-canonicals, and appear in the sitemap.
-- [ ] Privacy, terms, contact, funding, review status, sources, and corrections are accurate.
+- [ ] Privacy, terms, contact, review status, sources, and corrections are accurate.
 - [ ] No medical-review, clinical-validation, product-test, ranking, traffic, or adoption claim has been added without evidence.

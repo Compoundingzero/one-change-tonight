@@ -1,37 +1,35 @@
 ---
 path: /why/thermostat-not-helping/
-title: Why Lowering the Thermostat May Not Solve Night Heat
-description: A colder room may miss heat concentrated in the bed or around one sleeper. Use partner, timing, and location clues to choose a smaller test.
-eyebrow: When colder is not clearer
-audience: This page is for someone who has already cooled the room but still wakes hot—or makes a partner too cold.
-directAnswer: A thermostat changes the shared room, not the insulation, moisture, or airflow directly around one sleeper. If the partner becomes cold, the bed warms gradually, or heat arrives suddenly, lowering the thermostat again may add discomfort without testing the most relevant variable.
-uncertainty: A failed thermostat change does not prove that room temperature is irrelevant; it only makes repeated whole-room cooling a weaker first experiment.
+title: Why Lowering the Thermostat May Not Stop Night Heat
+description: A thermostat changes the whole room, but not the covers, moisture, or airflow around one sleeper.
+eyebrow: Check where the heat remains
+audience: The bedroom is cooler, but you still wake hot or another sleeper becomes cold.
+directAnswer: Lowering the thermostat cools the shared room. It does not directly remove insulation under the covers, move moisture away from your body, or target only one side. If the bed warms slowly, another sleeper becomes cold, or your heat begins suddenly, making the room colder again may add discomfort without reaching what remains hot.
+uncertainty: A failed thermostat change does not prove room temperature is irrelevant. It only shows that the change you tried did not solve the night.
 applies:
-  - Lowering the thermostat did not solve the awakening.
-  - A partner became uncomfortable before you did.
-  - Heat is localized to the bed or your upper body.
+  - The lower setting did not stop the awakening.
+  - Another sleeper became uncomfortable first.
+  - Heat remained around the bed or your upper body.
 mayNotApply:
-  - The room remains objectively and subjectively hot for both sleepers.
+  - The whole room still feels hot to both sleepers.
 observations:
-  - The partner is comfortable or cold.
-  - The room feels cool when you leave the covers.
-  - A previous thermostat change helped little or only briefly.
-experimentName: Direct existing airflow to one side
-experimentChange: Use an existing fan on the lowest useful setting across your side of the bed.
-experimentConstant: Keep thermostat and bedding unchanged.
+  - Whether the room feels cool when you leave the covers.
+  - Whether heat is under the covers or arrives suddenly around your upper body.
+  - Whether the other sleeper feels hot, comfortable, or cold at the same time.
+experimentName: Locate the heat before changing the thermostat again
+experimentChange: During the next awakening, compare the room, the space under the covers, and the other sleeper’s comfort.
+experimentConstant: Leave the thermostat and bedding unchanged for that observation.
 experimentSteps:
-  - Aim airflow across rather than directly at the partner.
-  - Stop if noise, dryness, breathing irritation, or partner disturbance outweighs comfort.
-  - Record whether heat, dampness, and time back to comfort change.
-doNotBuy: Do not buy a more powerful whole-room cooling device when the unresolved constraint appears local to one side.
-safetyNote: Environmental cooling can change comfort; it cannot determine or treat the underlying reason for repeated night heat.
+  - Note whether the room itself feels hot when you step away from the bed.
+  - Record where heat remained and whether it appeared suddenly or built slowly.
+doNotBuy: Before adding more room-cooling power, check whether the unresolved heat is actually limited to the bed or one sleeper.
+safetyNote: Room cooling can change comfort. It cannot identify or treat a medical cause of repeated night heat or sweating.
 sourceIds: [ACOG-HOT-FLASHES-2026, PMC-SLEEP-THERMAL-ENVIRONMENT-2012, NHS-NIGHT-SWEATS-2026]
 broaderLink:
-  { label: Compare bed cooling with bedroom cooling, href: /compare/cooling-bed-vs-bedroom/ }
-nextLink:
-  { label: Did the fan fail for a different reason?, href: /failed-fixes/fan-not-helping/ }
+  { label: Compare cooling the bed and the bedroom, href: /compare/cooling-bed-vs-bedroom/ }
+nextLink: { label: Troubleshoot a fan that did not help, href: /failed-fixes/fan-not-helping/ }
 context: failed-fix
 published: '2026-09-07'
-reviewed: '2026-09-07'
+reviewed: '2026-09-08'
 indexable: true
 ---

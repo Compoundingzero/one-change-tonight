@@ -1,29 +1,29 @@
 ---
 path: /guides/how-to-cool-one-side-of-a-bed/
 title: How to Cool One Side of a Bed Without Freezing Your Partner
-description: Start by separating insulation or directing existing airflow locally. Compare active mechanisms only after the one-sided constraint is clear.
-eyebrow: One-sided comfort
-audience: This guide is for two sleepers who share a room but need different immediate conditions.
-directAnswer: Keep the shared room stable and change the hot sleeper’s local environment first. Separate top bedding changes insulation without powered equipment. Current manufacturer examples also offer air- or water-based one-side configurations, but their setup, care, and side isolation must be verified rather than assumed.
-uncertainty: No single mechanism fits every bed, and environmental cooling may not change the onset of a sudden personal heat episode.
+description: Keep the bedroom comfortable for both people, then change covers or airflow only on the warmer sleeper’s side.
+eyebrow: Cool one side, not the whole room
+audience: One sleeper is hot while the other is comfortable or cold.
+directAnswer: Leave a comfortable room setting alone and change only the warmer sleeper’s side. Start with separate top covers. If that is not enough, try directing an existing fan across one side. BedJet and Sleepme also describe one-side powered setups, but check the current manuals before assuming how well either side is isolated.
+uncertainty: Beds, covers, fan placement, sound, and tolerance for moving air differ. A local change may improve comfort without changing when sudden heat begins.
 applies:
-  - The partner is comfortable or cold when one sleeper wakes hot.
-  - Whole-room cooling caused conflict or did not solve the problem.
-  - One-sided control matters more than a colder bedroom.
+  - The other sleeper is comfortable or cold.
+  - Lowering the room temperature made the other sleeper uncomfortable or did not help enough.
+  - Less insulation or more airflow is needed on only one side.
 mayNotApply:
-  - Both sleepers and the room are too hot.
+  - Both sleepers and the whole room feel too hot.
 observations:
-  - Shared top bedding imposes the same insulation on both sleepers.
-  - A directed fan test can show whether one side tolerates moving air and perceived sound.
-  - Current active examples use different components and describe one-side configurations differently.
-experimentName: Separate the top covers first
-experimentChange: Give each sleeper an existing top layer suited to their comfort.
-experimentConstant: Keep thermostat, fan, mattress surface, and sleepwear unchanged.
+  - Whether shared covers drift back across the warmer side.
+  - Whether a fan can reach one side without blowing on the other sleeper.
+  - Whether sound or moving air wakes either person.
+experimentName: Set up two separate cover zones
+experimentChange: Give each sleeper an existing top cover that suits their preferred warmth.
+experimentConstant: Leave the thermostat, fan setting, mattress surface, and sleepwear unchanged.
 experimentSteps:
-  - Arrange covers so neither sleeper’s layer repeatedly crosses onto the other side.
-  - Record awakenings, cold afterwards, and partner disturbance in the morning.
-doNotBuy: Do not pay for dual-zone control before confirming that shared insulation is not the simpler constraint.
-safetyNote: Local cooling supports comfort and does not diagnose or treat the reason one sleeper feels hot.
+  - Keep each cover on its own side so the test remains easy to judge.
+  - In the morning, ask whether either sleeper woke from heat, cold, noise, or shifting covers.
+doNotBuy: Try separate covers and existing airflow before paying for side-specific equipment. Those checks can help you decide whether separate control is worth comparing.
+safetyNote: Local cooling is for comfort. It cannot identify or treat a medical cause, and any setup should remain safe and comfortable for both people.
 sourceIds:
   [
     PMC-SLEEP-THERMAL-ENVIRONMENT-2012,
@@ -33,16 +33,16 @@ sourceIds:
   ]
 broaderLink:
   {
-    label: See the partner-temperature mismatch pattern,
+    label: Why two sleepers can need different setups,
     href: /patterns/partner-temperature-mismatch/,
   }
 nextLink:
   {
-    label: Compare separate bedding with active cooling,
+    label: Choose between separate covers and powered cooling,
     href: /guides/separate-bedding-or-active-cooling/,
   }
 context: partner-temperature
 published: '2026-09-07'
-reviewed: '2026-09-07'
+reviewed: '2026-09-08'
 indexable: true
 ---

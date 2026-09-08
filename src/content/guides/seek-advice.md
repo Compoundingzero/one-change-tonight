@@ -1,39 +1,39 @@
 ---
 path: /guides/when-to-seek-medical-advice/
-title: When Repeated Night Sweats Deserve Medical Advice
-description: Regular soaking night sweats or episodes that wake or worry you deserve a healthcare conversation. This site does not run an emergency triage algorithm.
-eyebrow: A calm care boundary
-audience: This page is for anyone deciding whether repeated night sweating should be discussed with a qualified healthcare professional.
-directAnswer: Current NHS guidance advises seeing a GP when night sweats regularly wake or worry you. It also says to seek advice when they occur with a very high temperature or feeling hot, cold, or shivery; a cough or diarrhoea; or unexplained weight loss. Report new, worsening, frequent, soaking, or concerning changes rather than trying to explain them with bedding alone.
-uncertainty: Only a clinician can consider personal history, medicines, examination, and testing; this environmental tool cannot decide a cause or rule out a condition.
+title: When to Seek Medical Advice About Night Sweats
+description: Contact a healthcare professional when night sweats regularly wake or worry you, soak bedding, change, or occur with other symptoms.
+eyebrow: When to contact a clinician
+audience: Night sweating is regular, changing, soaking, or worrying you.
+directAnswer: NHS guidance advises seeing a GP when night sweats regularly wake or worry you. It also advises seeking help when they occur with a very high temperature or feeling hot, cold, or shivery; a cough or diarrhoea; or unexplained weight loss. Report new, worsening, frequent, soaking, or concerning changes instead of assuming bedding explains them.
+uncertainty: Only a clinician can consider your history, medicines, examination, and any needed tests. This site cannot identify a cause or rule out a condition.
 applies:
-  - Episodes regularly wake you, worry you, soak clothing or bedding, or are changing.
+  - Sweating regularly wakes you, worries you, soaks clothing or bedding, or is changing.
   - Sleep disruption is affecting your days.
-  - You want to prepare observed facts for a conversation.
+  - You want to prepare clear facts before contacting a healthcare service.
 mayNotApply:
   - You feel seriously unwell; seek urgent help rather than waiting on this site.
 observations:
-  - Frequency and change over time.
-  - Whether sleepwear or bedding is genuinely soaked.
-  - Any high temperature or hot/cold/shivery feeling, cough, diarrhoea, unexplained weight loss, or other concern to report directly.
-experimentName: Prepare a factual appointment note
-experimentChange: Write down frequency, dampness, sleep disruption, change over time, and your questions.
+  - How often the sweating happens and whether that frequency is changing.
+  - Whether sleepwear or bedding is damp or soaked.
+  - Any very high temperature, hot/cold/shivery feeling, cough, diarrhoea, unexplained weight loss, or other concern.
+experimentName: Contact an appropriate healthcare service
+experimentChange: Write down the frequency, soaking, sleep disruption, changes, accompanying symptoms, and questions you want to raise.
 experimentConstant: Do not alter medicines, supplements, or clinician-directed care based on this site.
 experimentSteps:
-  - Use ordinary language and include what you observed rather than a suspected diagnosis.
-  - Contact an appropriate healthcare service for individualized advice.
-doNotBuy: Do not let a cooling purchase delay a healthcare conversation about a new, worsening, frequent, soaking, or worrying pattern.
-safetyNote: This page is general education, not personalized triage. Seek urgent help if you feel seriously unwell.
+  - Describe what you observed in ordinary language instead of offering a self-diagnosis.
+  - Contact an appropriate healthcare service for advice about your situation.
+doNotBuy: Cooling products can wait. Do not let a purchase delay a healthcare conversation about a new, worsening, frequent, soaking, or worrying pattern.
+safetyNote: This page gives general information, not personal triage. Seek urgent help if you feel seriously unwell.
 sourceIds:
   [NHS-NIGHT-SWEATS-2026, MENOPAUSE-SOCIETY-NIGHT-SWEATS-2026, ACOG-MENOPAUSE-YEARS-2026]
-broaderLink: { label: What does the tool refuse to determine?, href: /medical-boundaries/ }
+broaderLink: { label: Read what this site cannot determine, href: /medical-boundaries/ }
 nextLink:
   {
-    label: What should you record for the appointment?,
+    label: Prepare a short note for the appointment,
     href: /guides/what-to-record-for-a-clinician/,
   }
 context: care-notes
 published: '2026-09-07'
-reviewed: '2026-09-07'
+reviewed: '2026-09-08'
 indexable: true
 ---

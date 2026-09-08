@@ -1,39 +1,39 @@
 ---
 path: /why/bed-hot-room-cool/
-title: Why Does My Bed Feel Hot When the Bedroom Is Cool?
-description: The bed creates a smaller thermal environment around the sleeper. Isolate removable bedding layers before replacing the mattress.
-eyebrow: The bed microclimate
-audience: This page is for someone whose bed warms over time while the surrounding room still feels comfortable.
-directAnswer: Bedding, sleepwear, protectors, toppers, and the mattress surface create a small environment around the body that can feel warmer and damper than the room. A gradual build-up underneath or under the covers makes a bed-layer test more informative than turning the room colder again.
-uncertainty: A warm bed can contribute to comfort without explaining a sudden personal heat episode or the medical cause of sweating.
+title: Why Your Bed Feels Hot When the Bedroom Is Cool
+description: Covers, sleepwear, protectors, toppers, and the mattress create a warmer space around your body than the rest of the room.
+eyebrow: The bed can hold its own heat
+audience: The bedroom feels comfortable, but warmth builds under or around you.
+directAnswer: Covers, sleepwear, a protector, a topper, and the mattress surface form a small pocket around your body. That pocket can become warmer or damper than the bedroom. When warmth builds slowly under you or under the covers, checking one removable layer tells you more than making the whole room colder.
+uncertainty: A warmer bed can add discomfort without explaining sudden heat, repeated sweating, or the medical reason either occurs.
 applies:
   - The bed feels comfortable at first and warmer later.
-  - Heat is strongest underneath you or under the covers.
-  - The room and partner remain reasonably comfortable.
+  - Heat is strongest beneath you or under the covers.
+  - The room and another sleeper remain comfortable.
 mayNotApply:
-  - Heat arrives abruptly before the bed has become warm.
+  - Heat arrives suddenly before the bed has had time to warm.
 observations:
-  - Warmth increases with time in bed.
-  - A protector, topper, or thick top layer sits between you and cooler room air.
-  - Whole-room cooling helps only somewhat.
-experimentName: Change one removable bed layer
-experimentChange: Replace or remove one nonessential, safely removable layer for one night.
-experimentConstant: Keep the room, fan, sleepwear, and all other bedding exactly the same.
+  - How long it takes for the bed to feel warmer.
+  - Whether heat is under your body, under the top covers, or both.
+  - Which protector, topper, or thick cover can be changed safely.
+experimentName: Remove one nonessential bed layer
+experimentChange: Replace or remove one safely removable layer for one night.
+experimentConstant: Leave the room, fan, sleepwear, and every other bed layer unchanged.
 experimentSteps:
-  - Choose the lightest removable layer most likely to add insulation.
-  - Preserve any layer needed for mattress protection, hygiene, allergy management, or warranty coverage.
-  - Record whether warmth still builds in the same place and at the same time.
-doNotBuy: Do not replace the mattress until you have isolated the removable layers above it.
-safetyNote: Bed heat observations describe an environmental contributor, not the cause of repeated sweating or sudden heat.
+  - Start with the lightest removable layer that may be adding warmth.
+  - Keep every layer needed for hygiene, allergies, mattress protection, support, or warranty coverage.
+  - Record whether warmth returns in the same place and after the same amount of time.
+doNotBuy: Before replacing the mattress, test the removable layers above it one at a time.
+safetyNote: A bed-layer result describes comfort in that setup. It cannot explain repeated sweating or sudden heat.
 sourceIds: [PMC-SLEEP-THERMAL-ENVIRONMENT-2012, NHS-NIGHT-SWEATS-2026]
-broaderLink: { label: Read the bed heat build-up pattern, href: /patterns/bed-heat-build-up/ }
+broaderLink: { label: See the bed heat pattern, href: /patterns/bed-heat-build-up/ }
 nextLink:
   {
-    label: Could the mattress protector be contributing?,
+    label: Check whether the mattress protector holds warmth,
     href: /failed-fixes/mattress-protector-trapping-heat/,
   }
 context: bed-heat
 published: '2026-09-07'
-reviewed: '2026-09-07'
+reviewed: '2026-09-08'
 indexable: true
 ---

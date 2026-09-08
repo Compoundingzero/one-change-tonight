@@ -1,35 +1,39 @@
 ---
 path: /compare/cooling-bed-vs-bedroom/
 title: Cooling the Bed Versus Cooling the Bedroom
-description: Room cooling changes shared air; bed cooling changes a smaller sleep environment. Match the mechanism to what both sleepers actually observe.
-eyebrow: Compare the area affected
-audience: This comparison is for someone deciding whether the shared room or one sleeper’s immediate bed environment is the better target.
-directAnswer: Bedroom cooling acts broadly and can help when the whole room and both sleepers are hot. Bed cooling acts locally and may fit heat that builds under covers or a one-sided partner constraint, but it does not explain or treat the reason a personal heat episode begins.
-uncertainty: A cool room and a warm bed can coexist, and either mechanism can disappoint when the observed pattern has not been isolated.
+description: Cool the bedroom when heat is shared. Change the bed when warmth is held under covers or affects only one sleeper.
+eyebrow: Match the change to the hot area
+audience: You are deciding whether to cool the whole room or only the bed.
+directAnswer: Bedroom cooling changes the air shared by everyone in the room. A bed change affects the smaller space under or around one sleeper. Start with the bedroom when the whole room and both sleepers are hot. Start with one side of the bed when the room is comfortable but warmth builds under covers or another sleeper is cold.
+uncertainty: A cool room and a warm bed can exist at the same time. Neither observation explains why sudden personal heat or sweating occurs.
 applies:
-  - You can compare what the room, bed, and partner felt like at the same time.
-  - A room change has already produced an interpretable result.
-  - One-sided control may matter.
+  - You can compare the room, bed, and both sleepers at the same time.
+  - A previous room change produced a result you can describe.
+  - You need to know whether the remaining heat is shared or local.
 mayNotApply:
-  - You are choosing a medical treatment rather than an environmental comfort mechanism.
+  - You are looking for medical treatment rather than a comfort change.
 observations:
-  - Both sleepers hot points toward a shared room question.
-  - Warmth building underneath points toward the bed microclimate.
-  - A cold partner makes further room cooling a weaker first test.
-experimentName: Choose the smaller affected area
-experimentChange: Change only the room or only one bed-side variable, based on the strongest observation.
-experimentConstant: Keep every variable outside the chosen area unchanged.
+  - Whether both sleepers feel hot when the whole room feels hot.
+  - Whether warmth builds under the body or top covers.
+  - Whether further room cooling makes another sleeper cold.
+experimentName: Mark the smallest area that stays hot
+experimentChange: Change either the room or one side of the bed based on where heat is actually present, not both.
+experimentConstant: Leave every setting and layer outside that area unchanged.
 experimentSteps:
-  - Write down the predicted observation before bed.
-  - In the morning, compare what happened for both sleepers.
-doNotBuy: Do not buy bed cooling for a room-wide problem or larger air conditioning for a one-sided problem before testing the affected area.
-safetyNote: The comparison concerns thermal comfort and cannot diagnose the cause of sweating or sudden heat.
+  - Before bed, write down what you expect the one change to affect.
+  - In the morning, compare the room, bed, and comfort of both sleepers.
+doNotBuy: Room equipment cannot target one side, and bed equipment cannot cool an overheated room. Confirm the hot area before buying either.
+safetyNote: This comparison concerns comfort. It cannot diagnose the cause of sweating or sudden heat.
 sourceIds: [PMC-SLEEP-THERMAL-ENVIRONMENT-2012, NHS-NIGHT-SWEATS-2026]
-broaderLink: { label: Use the four-part observation framework, href: /room-bed-body-partner/ }
+broaderLink:
+  { label: 'Compare the room, bed, body, and partner', href: /room-bed-body-partner/ }
 nextLink:
-  { label: Is the need passive or active?, href: /compare/passive-vs-active-bed-cooling/ }
+  {
+    label: Decide between a bed-layer change and powered cooling,
+    href: /compare/passive-vs-active-bed-cooling/,
+  }
 context: mechanisms
 published: '2026-09-07'
-reviewed: '2026-09-07'
+reviewed: '2026-09-08'
 indexable: true
 ---

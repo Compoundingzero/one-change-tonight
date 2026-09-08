@@ -9,7 +9,7 @@ const appSchema = {
   applicationCategory: 'LifestyleApplication',
   operatingSystem: 'Any modern web browser',
   description:
-    'A private sleep-environment decision aid that selects one reversible comfort experiment. It is not a medical diagnostic application.',
+    'A private tool that suggests one reversible change to the room or bed. It cannot diagnose a medical condition.',
 };
 const contextTargets = [
   'partner-temperature',
@@ -24,16 +24,16 @@ const contextTargets = [
 
 <BaseLayout
   title="Find Tonight’s Change"
-  description="Answer a short, private set of environmental questions and receive one reversible comfort experiment. No diagnosis, account, or data sent to us."
+  description="Answer a few private questions and get one reversible change to try tonight. No diagnosis or account, and your answers are not sent to us."
   jsonLd={appSchema}
 >
   <div class="tool-shell wrap">
     <header>
       <p class="eyebrow">Find tonight’s change</p>
-      <h1>Stop guessing. Change one thing.</h1>
+      <h1>Choose one thing to change tonight.</h1>
       <p class="lede">
-        The tool looks at the room, bed, timing, moisture, and partner constraints. It selects
-        one small experiment and explains why.
+        Answer what happened in the room, bed, and body, and whether another sleeper felt hot or
+        cold. You’ll get one change to try and the reason for it.
       </p>
     </header>
     <MedicalBoundary />
@@ -51,13 +51,13 @@ const contextTargets = [
       <h2>What it cannot determine</h2>
       <p>
         The result cannot identify menopause, another medical condition, a medicine effect, or
-        any underlying cause. Environmental cooling may affect comfort without treating the
+        any underlying cause. A cooler room or bed may affect comfort without treating the
         reason for an episode.
       </p>
       <p>
-        <a href="/methodology/">Read the deterministic rule method</a> · <a href="/evidence/"
-          >Review the evidence boundary</a
-        > · <a href="/sources/">Open the source register</a>
+        <a href="/methodology/">See how the fixed rules work</a> · <a href="/evidence/"
+          >Review what the evidence can and cannot show</a
+        > · <a href="/sources/">Open the source list</a>
       </p>
     </section>
   </div>

@@ -24,7 +24,7 @@ export const QUESTION_DEFINITIONS = [
     id: 'wake_experience',
     prompt: 'What best describes the moment you woke?',
     whyItMatters:
-      'How the heat appeared helps separate room and bed conditions from a sudden personal-heat pattern.',
+      'Whether the heat came suddenly or built over time helps decide whether to start with the room, the bed, or your side.',
     answerKind: 'single',
     allowsUnanswered: true,
     options: [
@@ -40,7 +40,7 @@ export const QUESTION_DEFINITIONS = [
     id: 'co_sleeper_state',
     prompt: 'How did the room feel to the other sleeper?',
     whyItMatters:
-      'Different experiences in the same room can make a one-sided experiment more useful than further whole-room cooling.',
+      'If only one sleeper was hot, cooling the whole room more may make the other person uncomfortable.',
     answerKind: 'single',
     allowsUnanswered: true,
     options: [
@@ -55,7 +55,7 @@ export const QUESTION_DEFINITIONS = [
     id: 'after_episode',
     prompt: 'What happened after the heat began to ease?',
     whyItMatters:
-      'Recording moisture, temperature, and timing separately can show what remained after the strongest heat eased.',
+      'Feeling damp and then cold may make a dry replacement layer worth trying for comfort.',
     answerKind: 'single',
     allowsUnanswered: true,
     options: [
@@ -70,7 +70,7 @@ export const QUESTION_DEFINITIONS = [
     id: 'heat_location',
     prompt: 'Where did the heat or dampness feel most noticeable?',
     whyItMatters:
-      'Location can help choose which environmental variable is most useful to test first.',
+      'Where you felt the heat helps decide whether to start with the room, the bed, or your side.',
     answerKind: 'single',
     allowsUnanswered: true,
     options: [
@@ -89,7 +89,7 @@ export const QUESTION_DEFINITIONS = [
     id: 'whole_room_cooling_effect',
     prompt: 'What happened when you tried cooling the whole room?',
     whyItMatters:
-      'A room change that did not help—or made a partner too cold—can make another local experiment more informative.',
+      'If cooling the room did not help—or made your partner too cold—we’ll try a smaller, local change.',
     answerKind: 'single',
     allowsUnanswered: true,
     options: [
@@ -103,9 +103,8 @@ export const QUESTION_DEFINITIONS = [
   },
   {
     id: 'previous_attempts',
-    prompt: 'What have you already tried, and what happened?',
-    whyItMatters:
-      'Your plan should not repeat an environmental change that has already failed to provide useful information.',
+    prompt: 'What have you already tried?',
+    whyItMatters: 'We’ll avoid choosing something you have already tried.',
     answerKind: 'multiple',
     allowsUnanswered: true,
     options: [
@@ -131,9 +130,9 @@ export const QUESTION_DEFINITIONS = [
   },
   {
     id: 'frequency',
-    prompt: 'How often is night heat disrupting your sleep?',
+    prompt: 'How often does night heat disrupt your sleep?',
     whyItMatters:
-      'Frequency changes the care reminder and whether a more involved environmental comparison is worth considering.',
+      'We use this to decide whether to show a care reminder and whether it makes sense to compare powered cooling later.',
     answerKind: 'single',
     allowsUnanswered: true,
     options: [
@@ -146,9 +145,9 @@ export const QUESTION_DEFINITIONS = [
   },
   {
     id: 'change_status',
-    prompt: 'Is this pattern new or getting worse?',
+    prompt: 'Is this night heat new or getting worse?',
     whyItMatters:
-      'This answer is used only to strengthen a reminder to speak with a qualified healthcare professional.',
+      'We ask only so we can show a stronger reminder to speak with a qualified healthcare professional.',
     answerKind: 'single',
     allowsUnanswered: true,
     options: [
@@ -160,14 +159,14 @@ export const QUESTION_DEFINITIONS = [
   },
   {
     id: 'noise_sensitivity',
-    prompt: 'How important is quiet for this experiment?',
-    whyItMatters: 'Noise sensitivity can rule out airflow as tonight’s smallest useful change.',
+    prompt: 'How quiet does tonight’s change need to be?',
+    whyItMatters: 'If quiet matters, we won’t suggest a fan-based change.',
     answerKind: 'single',
     allowsUnanswered: true,
     options: [
-      { value: 'very_important', label: 'Very important; small sounds wake us' },
-      { value: 'some_noise_acceptable', label: 'Some noise is acceptable' },
-      { value: 'not_a_major_concern', label: 'Noise is not a major concern' },
+      { value: 'very_important', label: 'Very quiet; small sounds wake me or my partner' },
+      { value: 'some_noise_acceptable', label: 'Some sound is okay' },
+      { value: 'not_a_major_concern', label: 'Sound is not a major concern' },
       { value: 'not_sure', label: 'I’m not sure' },
     ],
   },
