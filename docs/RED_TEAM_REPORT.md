@@ -1,6 +1,6 @@
 # Red-team report
 
-Date: 2026-09-07. Scope: final local noindex-preview candidate before GitHub and Railway release. Disposition: **preview ship candidate; production no-ship until owner-controlled identity, domain, and indexing gates are complete**.
+Date: 2026-09-07. Scope: final local candidate plus the deployed Railway noindex preview. Disposition: **preview shipped and verified; production no-ship until owner-controlled identity, domain, and indexing gates are complete**.
 
 ## Attacks attempted and disposition
 
@@ -36,11 +36,13 @@ Date: 2026-09-07. Scope: final local noindex-preview candidate before GitHub and
 | Browser and accessibility suites          | Pass; 14 Chromium scenarios and 7 axe scenarios                                                                                            |
 | Dependency advisory audit                 | Pass; no known vulnerabilities                                                                                                             |
 | External source URL check                 | 15/16 resolved automatically; OpenAI publisher FAQ returned HTTP 403 to the audit agent and was separately verified in an ordinary browser |
+| GitHub release gate                       | Pass on commit `eee5872fad3364fa8b12e96b9908a823cb868a2c`; all CI steps completed successfully                                             |
+| Railway live verification                 | Pass; deployment `2cfc74b6-79b8-4269-af62-1cf6b302522a` reached `SUCCESS`, 14 Chromium and 7 axe scenarios passed live                     |
 
 ## Honest limitations
 
-No real users, clinicians, physical devices, VoiceOver/NVDA/TalkBack sessions, or field Core Web Vitals participated. The product has not been clinically validated and does not test treatment effectiveness. Product categories were not tested firsthand, and no ranking or purchasing claim is made. Search indexing, ranking, traffic, AI citations, comprehension, adherence, and conversion cannot be guaranteed.
+No real users, clinicians, physical devices, VoiceOver/NVDA/TalkBack sessions, or field Core Web Vitals participated. The product has not been clinically validated and does not test treatment effectiveness. Product categories were not tested firsthand, and no ranking or purchasing claim is made. Search indexing, ranking, traffic, AI citations, comprehension, adherence, and conversion cannot be guaranteed. A cold request from the test host exceeded the 2.5-second LCP target because TCP/TLS setup alone took 2.28 seconds; warm-origin samples passed, but only future field data can establish a 75th-percentile result.
 
 ## Remaining gates
 
-The noindex preview may ship after the exact Git commit is pushed, Railway reports `SUCCESS`, and live status, headers, redirects, compression, caching, 404, robots, sitemap, no-canonical behavior, and browser flows are verified. Production remains blocked only on genuine owner-controlled actions: final domain/DNS, legal owner and jurisdiction, monitored contact, webmaster verification, GPTBot policy, any desired identified medical reviewer, and any future analytics approval.
+The noindex preview is shipped and verified at <https://one-change-tonight-production.up.railway.app>. Production remains blocked only on genuine owner-controlled actions: final domain/DNS, legal owner and jurisdiction, monitored contact, webmaster verification, GPTBot policy, any desired identified medical reviewer, and any future analytics approval.

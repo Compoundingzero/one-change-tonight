@@ -1,6 +1,6 @@
 # Final screen review
 
-Date: 2026-09-07. This review covers the regenerated product screenshots after the fold, tracker, noncausal-language, link-label, and screenshot-focus corrections. It is a heuristic and automated review, not real-user, clinical, physical-device, or assistive-technology validation.
+Date: 2026-09-07. This review covers the regenerated product screenshots after the fold, tracker, noncausal-language, link-label, and screenshot-focus corrections. The required views were regenerated against the deployed Railway preview and the live responsive and visual suites passed. It is a heuristic and automated review, not real-user, clinical, physical-device, or assistive-technology validation.
 
 ## Required release captures
 

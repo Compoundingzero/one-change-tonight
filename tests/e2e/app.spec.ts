@@ -70,7 +70,11 @@ test('homepage begins with first value, selection does not auto-advance, and mob
   await expect(
     page.getByRole('group', { name: 'What best describes the moment you woke?' }),
   ).toBeVisible();
-  await page.screenshot({ path: join(screenshotDir, 'selected-answer.png'), fullPage: true });
+  await page.screenshot({
+    path: join(screenshotDir, 'selected-answer.png'),
+    fullPage: true,
+    animations: 'disabled',
+  });
   const overflow = await page.evaluate(
     () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
   );
@@ -228,7 +232,8 @@ test('complete assessment, go back, restore, check in, print, theme, start over,
   expect(requestsAfterLoad.join('\n')).not.toMatch(
     /sudden_wave|partner_cold|five_or_more|local_comfort|health/i,
   );
-  expect(requestsAfterLoad.every((entry) => entry.includes('127.0.0.1:4321'))).toBe(true);
+  const appOrigin = new URL(page.url()).origin;
+  expect(requestsAfterLoad.every((entry) => entry.includes(appOrigin))).toBe(true);
   expect(page.url()).not.toMatch(/sudden_wave|partner_cold|five_or_more|local_comfort/);
 
   await page.getByRole('button', { name: 'Delete local data' }).click();
@@ -339,6 +344,7 @@ test('changing adaptive branches removes the hidden discriminator before storage
   await page.screenshot({
     path: join(screenshotDir, 'conditional-question.png'),
     fullPage: true,
+    animations: 'disabled',
   });
   await choose(page, 'Throughout the entire room');
   await page.getByLabel('Lower thermostat', { exact: true }).check();
@@ -392,7 +398,11 @@ test('uncertainty, responsive reflow, reduced motion, keyboard focus, high contr
   await page.goto('/');
   await waitForHydration(page);
   await page.getByLabel('I’m not sure', { exact: true }).check();
-  await page.screenshot({ path: join(screenshotDir, 'i-am-not-sure.png'), fullPage: true });
+  await page.screenshot({
+    path: join(screenshotDir, 'i-am-not-sure.png'),
+    fullPage: true,
+    animations: 'disabled',
+  });
 
   await page.goto('/privacy/');
   await page.keyboard.press('Tab');

@@ -8,7 +8,9 @@ This report is completed from command output, browser automation, screenshot ins
 
 The final release gate covers format, lint, strict typecheck, 41 unit regressions (including a 24,696-case decision enumeration, canonical server redirects, and post-tracker language), dependency advisories, content/source validation, links, rendered SEO rules, privacy source/bundle scans, required-artifact inventory, the static preview build, bundle budgets, 14 Chromium journey/visual/performance checks, and seven axe scenarios. The production preflight was also exercised negatively: it correctly refused to build without an owner-controlled root domain, legal identity, jurisdiction, and monitored contact address, and it rejects platform-preview hostnames.
 
-The live-preview section below is filled only after the immutable release commit is deployed and checked.
+GitHub CI passed the complete gate on release commit `eee5872fad3364fa8b12e96b9908a823cb868a2c` before it was sent to Railway.
+
+The first automatic Dependabot version-update job is separately red because GitHub's default three-day package cooldown encountered two transitive versions already locked on their release date (`@typescript-eslint/types@8.70.0` and `@clack/prompts@1.8.0`). This is not a vulnerability finding or product-CI failure. The cooldown remains enabled; the packages become eligible after 2026-09-10 20:15 UTC, and the scheduled update may retry then.
 
 ## Local browser performance equivalent
 
@@ -32,4 +34,18 @@ Physical devices, VoiceOver/NVDA/TalkBack, and moderated comprehension remain un
 
 ## Live noindex preview
 
-Pending the final Railway deployment. Verify the URL, deploy status, response/security headers, compression, asset caching, real 404 status, `robots.txt`, empty preview sitemap, no canonical, mobile assessment, refresh restoration, and complete local deletion here after deployment.
+Railway deployment `2cfc74b6-79b8-4269-af62-1cf6b302522a` reached `SUCCESS` for source commit `eee5872fad3364fa8b12e96b9908a823cb868a2c`. The verified URL is [one-change-tonight-production.up.railway.app](https://one-change-tonight-production.up.railway.app). The Railway environment happens to be named `production`, but the application build is intentionally and verifiably a **preview** through `PUBLIC_DEPLOY_CONTEXT=preview`; it must not be treated as the production launch.
+
+| Live check                           | Result                                                                                                                                      |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Homepage, tool, source, comparison   | `200`                                                                                                                                       |
+| `/tool` and `/index.html`            | Canonical `308` redirects to `/tool/` and `/`                                                                                               |
+| Missing route and unsupported `POST` | Real `404`; `405` with `Allow: GET, HEAD`                                                                                                   |
+| Preview indexing                     | `noindex, nofollow, noarchive`; no canonical; `robots.txt` disallows all; XML sitemap has zero URLs                                         |
+| Security                             | CSP blocks connections and framing; COOP, referrer, MIME-sniffing, frame, and permissions protections present                               |
+| Transport and caching                | Gzip present when requested; hashed CSS is `public, max-age=31536000, immutable`                                                            |
+| Path handling                        | Encoded traversal does not expose files; invalid UTF-8 receives `400`                                                                       |
+| Live browser journey                 | 14/14 Chromium scenarios passed, including all results, local restore/deletion, tracker, print, night mode, contextual entry, and 320px fit |
+| Live accessibility                   | 7/7 axe scenarios passed with no serious or critical findings                                                                               |
+
+Warm-origin live lab observations were: homepage 2.160 s LCP, tool 2.332 s, awake-and-hot 1.588 s, search page 1.980 s, and comparison 1.576 s; CLS was zero. A separate cold connection from the test host took 3.429 s total, of which 2.280 s elapsed before TLS completed; four immediately following HTTP probes took 1.457–1.495 s total. These are small lab samples, not 75th-percentile field data. Railway's edge returns `502` for a syntactically malformed bare-percent URL before it reaches the application; the application itself returns `400` for a validly encoded invalid UTF-8 path, and neither response exposes content.

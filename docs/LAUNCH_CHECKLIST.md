@@ -2,12 +2,12 @@
 
 ## Automated release gate
 
-- [ ] `pnpm audit:all` passes on the exact commit.
-- [ ] Static build contains every public route and no personal-state route.
-- [ ] Unit fixtures cover four primary patterns, modifiers, exclusions, premium fit, care reminder, migration, and deletion.
-- [ ] Playwright and axe pass at representative states and widths.
-- [ ] Preview build is noindex with no canonical and an empty sitemap.
-- [ ] Live response headers, compression, caching, 404, robots, and OAI-SearchBot behavior are verified.
+- [x] `pnpm audit:all` passes on the release commit.
+- [x] Static build contains every public route and no personal-state route.
+- [x] Unit fixtures cover four primary patterns, modifiers, exclusions, premium fit, care reminder, migration, and deletion.
+- [x] Playwright and axe pass at representative states and widths, locally and against the deployed preview.
+- [x] Preview build is noindex with no canonical and an empty sitemap.
+- [x] Live response headers, compression, caching, 404, robots, and preview crawler blocking are verified.
 
 ## Production owner gate
 

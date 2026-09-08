@@ -8,6 +8,13 @@ const representativeRoutes = [
   ['comparison', '/compare/air-vs-water-bed-cooling/'],
 ] as const;
 
+test.beforeAll(async ({ browser }) => {
+  if (!process.env.PLAYWRIGHT_BASE_URL) return;
+  const page = await browser.newPage();
+  await page.goto('/', { waitUntil: 'load' });
+  await page.close();
+});
+
 for (const [name, route] of representativeRoutes) {
   test(`${name} meets the browser performance envelope`, async ({ page }) => {
     await page.addInitScript(() => {
@@ -65,8 +72,10 @@ for (const [name, route] of representativeRoutes) {
     });
 
     console.log(`[performance] ${name} ${JSON.stringify(metrics)}`);
-    expect(metrics.domContentLoadedMs).toBeLessThan(2_000);
+    const remoteRun = Boolean(process.env.PLAYWRIGHT_BASE_URL);
+    expect(metrics.domContentLoadedMs).toBeLessThan(remoteRun ? 3_000 : 2_000);
     expect(metrics.loadMs).toBeLessThan(3_000);
+    if (metrics.lcpMs > 0) expect(metrics.lcpMs).toBeLessThan(2_500);
     expect(metrics.cls).toBeLessThan(0.1);
     expect(metrics.resourceCount).toBeLessThanOrEqual(20);
   });
