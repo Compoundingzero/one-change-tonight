@@ -1,0 +1,223 @@
+---
+import BaseLayout from '@/components/layout/BaseLayout.astro';
+import MedicalBoundary from '@/components/safety/MedicalBoundary.astro';
+import ReviewStatus from './ReviewStatus.astro';
+import SourceList from './SourceList.astro';
+import ClaimEvidence from './ClaimEvidence.astro';
+
+interface Link {
+  label: string;
+  href: string;
+}
+interface Props {
+  article: {
+    path: string;
+    title: string;
+    description: string;
+    eyebrow: string;
+    audience: string;
+    directAnswer: string;
+    uncertainty: string;
+    applies: string[];
+    mayNotApply: string[];
+    observations: string[];
+    experimentName: string;
+    experimentChange: string;
+    experimentConstant: string;
+    experimentSteps: string[];
+    doNotBuy: string;
+    safetyNote: string;
+    sourceIds: string[];
+    broaderLink: Link;
+    nextLink: Link;
+    context: string;
+    published: string;
+    reviewed: string;
+    indexable: boolean;
+  };
+}
+const { article } = Astro.props;
+const contextHref = `/tool/#${article.context}`;
+const observationQuestion: Record<string, string> = {
+  'cold-room': 'Whether room, bed, timing, or moisture is the most useful first variable',
+  'partner-temperature':
+    'Whether one side needs a different condition while the room stays shared',
+  'hot-then-cold': 'What happened during onset versus after the strongest heat eased',
+  'bed-heat': 'Which removable bed layer is most useful to compare',
+  'failed-fix': 'What the earlier change did and did not alter',
+  mechanisms: 'Which household constraint a mechanism would need to address',
+  'care-notes': 'Which observed facts belong in a healthcare conversation',
+};
+---
+
+<BaseLayout
+  title={article.title}
+  description={article.description}
+  article
+  noindex={!article.indexable}
+  published={article.published}
+  modified={article.reviewed}
+>
+  <article class="wrap article-shell">
+    <header class="article-head">
+      <p class="eyebrow">{article.eyebrow}</p>
+      <h1>{article.title}</h1>
+      <p class="audience">{article.audience}</p>
+      <ReviewStatus published={article.published} reviewed={article.reviewed} />
+    </header>
+
+    <section id="direct-answer" class="direct panel">
+      <h2>Direct answer</h2>
+      <p>{article.directAnswer}</p>
+      <p class="uncertainty"><strong>The uncertainty:</strong> {article.uncertainty}</p>
+    </section>
+
+    <MedicalBoundary compact />
+
+    <section id="what-to-observe">
+      <h2>What to observe tonight</h2>
+      <div class="grid two">
+        <div>
+          <h3>This page fits when</h3>
+          <ul>{article.applies.map((item) => <li>{item}</li>)}</ul>
+        </div>
+        <div>
+          <h3>It may not fit when</h3>
+          <ul>{article.mayNotApply.map((item) => <li>{item}</li>)}</ul>
+        </div>
+      </div>
+      <table class="stackable">
+        <thead><tr><th>What happened</th><th>What to examine first</th></tr></thead>
+        <tbody>
+          {
+            article.observations.map((item) => (
+              <tr>
+                <>
+                  <td data-label="Observation">{item}</td>
+                  <td data-label="What it can clarify">
+                    {observationQuestion[article.context]}
+                  </td>
+                </>
+              </tr>
+            ))
+          }
+          <tr
+            ><td data-label="Observation">A partner stayed comfortable or cold</td><td
+              data-label="What it can clarify"
+              >Whether a one-sided environmental change is more informative than more room
+              cooling</td
+            ></tr
+          >
+        </tbody>
+      </table>
+      <p>This table organizes observations. It does not identify a medical cause.</p>
+    </section>
+
+    <section id="one-change-tonight" class="experiment panel">
+      <p class="eyebrow">One Change Tonight</p>
+      <h2>{article.experimentName}</h2>
+      <p><strong>Change only:</strong> {article.experimentChange}</p>
+      <p id="what-to-keep-the-same">
+        <strong>Keep the same:</strong>
+        {article.experimentConstant}
+      </p>
+      <ol>{article.experimentSteps.map((step) => <li>{step}</li>)}</ol>
+      <p>
+        <strong>In the morning:</strong> record awakenings, dampness, cold afterwards, time to become
+        comfortable, partner disturbance, and whether this one change helped.
+      </p>
+      <p>
+        <strong>Stop:</strong> if the change causes discomfort, breathing irritation, unsafe cold,
+        or disturbs either sleeper more than it helps.
+      </p>
+    </section>
+
+    <section id="do-not-buy-yet" class="dont-buy">
+      <h2>Do Not Buy Yet</h2>
+      <p>{article.doNotBuy}</p>
+      <p>
+        We currently receive no commission from the products or product categories discussed.
+      </p>
+    </section>
+
+    <section id="what-this-does-not-mean">
+      <h2>What this does not establish</h2>
+      <p>{article.safetyNote}</p>
+      <p>
+        Environmental cooling may affect comfort without treating the underlying reason for an
+        episode.
+      </p>
+    </section>
+
+    <section class="tool-invite panel" aria-labelledby="tool-invite-title">
+      <p class="eyebrow">Private decision aid</p>
+      <h2 id="tool-invite-title">Find the smallest useful change for your night</h2>
+      <p>
+        Check whether tonight’s pattern points more toward the room, the bed, sudden personal
+        heat, moisture, or a partner-temperature mismatch.
+      </p>
+      <p class="trust">No account. No name. Your answers stay in this browser.</p>
+      <a class="button" href={contextHref}>Find tonight’s change</a>
+    </section>
+
+    <nav class="next-questions" aria-label="Useful next questions">
+      <h2>Follow the next useful question</h2>
+      <a href={article.broaderLink.href}>{article.broaderLink.label}</a>
+      <a href={article.nextLink.href}>{article.nextLink.label}</a>
+      <a href="/three-night-experiment/"
+        >Would the same one-variable test help for three nights?</a
+      >
+      <a href="/evidence/">How does the evidence boundary work?</a>
+    </nav>
+
+    <ClaimEvidence route={article.path} />
+    <SourceList ids={article.sourceIds} />
+  </article>
+</BaseLayout>
+<style>
+  .article-shell {
+    max-width: 66rem;
+    padding-top: clamp(2rem, 6vw, 5rem);
+  }
+  .article-head {
+    max-width: 52rem;
+    margin-bottom: var(--space-6);
+  }
+  .article-head h1 {
+    font-size: clamp(2.5rem, 6vw, 4.7rem);
+  }
+  .audience {
+    font-size: 1.08rem;
+    color: var(--ink-650);
+  }
+  .direct {
+    margin-bottom: var(--space-5);
+    border-top: 5px solid var(--cool-600);
+  }
+  .direct h2,
+  .experiment h2 {
+    margin-top: 0.5rem;
+  }
+  .uncertainty {
+    color: var(--ink-800);
+  }
+  .experiment {
+    margin-top: var(--space-7);
+    background: linear-gradient(140deg, var(--paper-raised), var(--cool-150));
+  }
+  .dont-buy {
+    border-block: 1px solid var(--line);
+    margin-block: var(--space-7);
+  }
+  .tool-invite {
+    margin-top: var(--space-7);
+  }
+  .next-questions {
+    display: grid;
+    gap: 0.75rem;
+    padding-block: var(--space-6);
+  }
+  .next-questions h2 {
+    margin-bottom: 0.25rem;
+  }
+</style>

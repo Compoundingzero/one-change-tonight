@@ -1,0 +1,31 @@
+---
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+
+<aside id="medical-boundary" class="notice" aria-label="Medical boundary">
+  {
+    compact ? (
+      <p>
+        <strong>Comfort tool, not diagnosis.</strong> New, worsening, frequent, severe, or
+        concerning symptoms deserve a conversation with a qualified healthcare professional.
+      </p>
+    ) : (
+      <p>
+        <strong>
+          This tool examines the sleep environment and what you can test for comfort.
+        </strong>{' '}
+        It cannot identify the medical cause of night sweats. New, worsening, frequent, severe,
+        or concerning symptoms deserve a conversation with a qualified healthcare professional.
+        Seek urgent help if you feel seriously unwell.
+      </p>
+    )
+  }
+</aside>
+<style>
+  p {
+    margin: 0;
+  }
+</style>

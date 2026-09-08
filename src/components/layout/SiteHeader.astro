@@ -1,0 +1,94 @@
+---
+import { siteConfig } from '@/config/site';
+---
+
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/" aria-label={`${siteConfig.siteName}, home`}>
+      <span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+      <span>{siteConfig.siteName}</span>
+    </a>
+    <nav aria-label="Primary">
+      <a href="/how-it-works/">How it works</a>
+      <a href="/room-bed-body-partner/">Patterns</a>
+      <a href="/evidence/">Evidence</a>
+      <a href="/privacy/">Privacy</a>
+    </nav>
+  </div>
+</header>
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--line);
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+  }
+  .bar {
+    min-height: 4.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    padding-block: 0.4rem;
+  }
+  .brand {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.72rem;
+    color: var(--ink-950);
+    text-decoration: none;
+    font-size: clamp(0.9rem, 4vw, 1rem);
+    font-weight: 760;
+    letter-spacing: -0.02em;
+  }
+  .mark {
+    display: grid;
+    grid-template-columns: repeat(4, 4px);
+    gap: 3px;
+    height: 18px;
+    align-items: end;
+  }
+  .mark i {
+    display: block;
+    width: 4px;
+    height: 12px;
+    background: var(--ink-650);
+    border-radius: 3px;
+  }
+  .mark i:nth-child(3) {
+    height: 18px;
+    background: var(--cool-600);
+  }
+  nav {
+    display: flex;
+    gap: 1.25rem;
+  }
+  nav a {
+    color: var(--ink-800);
+    text-decoration: none;
+    font-size: 0.92rem;
+  }
+  @media (max-width: 620px) {
+    nav {
+      flex: 1 1 auto;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 0.65rem;
+    }
+    nav a:nth-child(2),
+    nav a:nth-child(3) {
+      display: none;
+    }
+    .bar {
+      min-height: 3.7rem;
+    }
+  }
+  @media (max-width: 340px) {
+    nav {
+      display: none;
+    }
+    .bar {
+      min-height: 3.25rem;
+    }
+  }
+</style>

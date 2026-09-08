@@ -1,0 +1,34 @@
+---
+import { siteConfig } from '@/config/site';
+interface Props {
+  published?: string;
+  reviewed?: string;
+}
+const { published = '2026-09-07', reviewed = '2026-09-07' } = Astro.props;
+const formatDate = (value: string) =>
+  new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'UTC' }).format(
+    new Date(`${value}T00:00:00Z`),
+  );
+---
+
+<div class="review" aria-label="Editorial review status">
+  <strong>{siteConfig.evidenceReviewLabel}</strong>
+  <span
+    >Published {formatDate(published)} · Reviewed {formatDate(reviewed)} · <a
+      href="/corrections/">Corrections</a
+    ></span
+  >
+</div>
+<style>
+  .review {
+    display: grid;
+    gap: 0.2rem;
+    color: var(--ink-650);
+    font-size: 0.84rem;
+    padding-block: 1rem;
+    border-block: 1px solid var(--line);
+  }
+  strong {
+    color: var(--ink-800);
+  }
+</style>

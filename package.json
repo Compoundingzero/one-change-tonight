@@ -1,0 +1,58 @@
+{
+  "name": "one-change-tonight",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "packageManager": "pnpm@10.18.3",
+  "scripts": {
+    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "build": "pnpm content:validate && pnpm typecheck && ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
+    "start": "node scripts/serve.mjs",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "ASTRO_TELEMETRY_DISABLED=1 astro check",
+    "test": "vitest run",
+    "test:e2e": "playwright test --project=chromium",
+    "test:a11y": "playwright test --project=a11y",
+    "deps:audit": "pnpm audit --audit-level high",
+    "content:validate": "node --import tsx scripts/validate-content.ts",
+    "sources:check": "node --import tsx scripts/check-external-sources.ts",
+    "links:check": "node --import tsx scripts/check-links.ts",
+    "seo:audit": "node --import tsx scripts/audit-seo.ts",
+    "privacy:audit": "node --import tsx scripts/audit-privacy.ts",
+    "performance:audit": "node --import tsx scripts/audit-performance.ts",
+    "artifacts:check": "node --import tsx scripts/check-required-artifacts.ts",
+    "audit:all": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm deps:audit && pnpm content:validate && pnpm build && pnpm links:check && pnpm seo:audit && pnpm privacy:audit && pnpm artifacts:check && pnpm performance:audit && pnpm test:e2e && pnpm test:a11y",
+    "owner:setup": "node --import tsx scripts/owner-setup.ts",
+    "indexnow:submit": "node --import tsx scripts/submit-indexnow.ts"
+  },
+  "dependencies": {
+    "@astrojs/preact": "^6.0.5",
+    "astro": "^7.3.1",
+    "preact": "^10.29.8",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "@astrojs/check": "^0.9.10",
+    "@axe-core/playwright": "^4.10.2",
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^22.18.0",
+    "@typescript-eslint/eslint-plugin": "^8.42.0",
+    "@typescript-eslint/parser": "^8.42.0",
+    "eslint": "^9.35.0",
+    "eslint-plugin-astro": "^1.3.1",
+    "playwright": "^1.55.0",
+    "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.42.0",
+    "vitest": "^4.0.0"
+  }
+}

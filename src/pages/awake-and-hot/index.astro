@@ -1,0 +1,79 @@
+---
+import BaseLayout from '@/components/layout/BaseLayout.astro';
+import AwakeAndHot from '@/components/assessment/AwakeAndHot';
+import DeleteLocalDataControl from '@/components/privacy/DeleteLocalDataControl';
+---
+
+<BaseLayout
+  title="Awake and Hot Right Now"
+  description="A reduced, low-brightness three-step view for a hot awakening: check room, partner, and timing, then try one reversible comfort action."
+  noindex
+  minimal
+  nightDefault
+>
+  <header class="awake-header wrap">
+    <a class="brand" href="/">One Change Tonight</a>
+    <button id="brightness" type="button" aria-pressed="true">Low-brightness view</button>
+  </header>
+  <section class="awake-main wrap">
+    <h1>Awake and hot right now?</h1>
+    <aside class="safety">
+      <strong>First:</strong> this is a comfort tool, not emergency or medical triage. Seek urgent
+      help if you feel seriously unwell.
+    </aside>
+    <AwakeAndHot client:load />
+    <div class="awake-delete"><DeleteLocalDataControl client:load /></div>
+  </section>
+  <script is:inline>
+    const button = document.querySelector('#brightness');
+    button?.addEventListener('click', () => {
+      const night = document.documentElement.dataset.theme !== 'night';
+      document.documentElement.dataset.theme = night ? 'night' : 'light';
+      button.setAttribute('aria-pressed', String(night));
+      button.textContent = night ? 'Low-brightness view' : 'Use low-brightness view';
+    });
+  </script>
+</BaseLayout>
+<style>
+  .awake-header {
+    min-height: 3.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .brand {
+    color: var(--ink-950);
+    text-decoration: none;
+    font-weight: 760;
+  }
+  #brightness {
+    border: 0;
+    background: transparent;
+    color: var(--cool-700);
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .awake-main {
+    padding-top: clamp(1rem, 4vw, 2rem);
+    padding-bottom: 3rem;
+  }
+  .awake-main > h1 {
+    max-width: 40rem;
+    margin-inline: auto;
+    font-size: clamp(2rem, 7vw, 3.1rem);
+  }
+  .safety {
+    max-width: 40rem;
+    margin: 0 auto 1.5rem;
+    padding: 0.7rem 1rem;
+    color: var(--ink-800);
+    font-size: 0.85rem;
+    border-left: 3px solid var(--warm-650);
+  }
+  .awake-delete {
+    max-width: 40rem;
+    margin: 1rem auto 0;
+  }
+</style>

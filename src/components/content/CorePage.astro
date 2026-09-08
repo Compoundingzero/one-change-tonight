@@ -1,0 +1,199 @@
+---
+import BaseLayout from '@/components/layout/BaseLayout.astro';
+import MedicalBoundary from '@/components/safety/MedicalBoundary.astro';
+import ReviewStatus from './ReviewStatus.astro';
+import SourceList from './SourceList.astro';
+import DiagramGallery from './DiagramGallery.astro';
+import ClaimEvidence from './ClaimEvidence.astro';
+import DeleteLocalDataControl from '@/components/privacy/DeleteLocalDataControl';
+import { getCollection } from 'astro:content';
+import { corePages, type CorePage } from '@/data/core-pages';
+import { isPreview, siteConfig } from '@/config/site';
+interface Props {
+  page: CorePage;
+}
+const { page } = Astro.props;
+const isSitemap = page.path === '/sitemap/';
+const sitemapArticles = isSitemap
+  ? (await Promise.all([getCollection('guides'), getCollection('comparisons')])).flat()
+  : [];
+const issueUrl = `${siteConfig.repositoryUrl}/issues/new`;
+const contactUrl =
+  siteConfig.contactMethod === 'email' ? `mailto:${siteConfig.contactEmail}` : issueUrl;
+---
+
+<BaseLayout title={page.title} description={page.description} article>
+  <article class="wrap shell">
+    <header>
+      <p class="eyebrow">{page.eyebrow}</p>
+      <h1>{page.title}</h1>
+      <p class="lede">{page.intro}</p>
+      <ReviewStatus />
+    </header>
+    {page.healthAdjacent && <MedicalBoundary compact />}
+    {
+      page.sections.map((section, index) => (
+        <section id={section.id} class:list={['section', index === 0 && 'first']}>
+          <h2>{section.heading}</h2>
+          {section.paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+          {section.bullets && (
+            <ul>
+              {section.bullets.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          )}
+        </section>
+      ))
+    }
+    {
+      isSitemap && (
+        <nav class="link-list" aria-label="All public pages">
+          {corePages
+            .filter((entry) => entry.path !== '/sitemap/')
+            .map((entry) => (
+              <a href={entry.path}>{entry.title}</a>
+            ))}
+          <a href="/tool/">Find tonight’s change</a>
+          <a href="/awake-and-hot/">Awake and hot now</a>
+          {sitemapArticles.map((entry) => (
+            <a href={entry.data.path}>{entry.data.title}</a>
+          ))}
+        </nav>
+      )
+    }
+    {
+      page.path === '/compare/' && (
+        <div class="link-list">
+          <a href="/compare/cooling-bed-vs-bedroom/">Cooling bed versus bedroom</a>
+          <a href="/compare/passive-vs-active-bed-cooling/">Passive versus active</a>
+          <a href="/compare/air-vs-water-bed-cooling/">Air versus water</a>
+          <a href="/compare/bed-fan-vs-water-pad/">Bed fan versus water pad</a>
+          <a href="/compare/one-zone-vs-dual-zone/">One zone versus dual zone</a>
+        </div>
+      )
+    }
+    {page.path === '/room-bed-body-partner/' && <DiagramGallery />}
+    {page.path === '/privacy/' && <DeleteLocalDataControl client:load />}
+    {
+      (page.path === '/contact/' || page.path === '/corrections/') && (
+        <section id="owner-contact" class="section owner-contact">
+          <h2>{page.path === '/contact/' ? 'Owner and contact' : 'Correction channel'}</h2>
+          {!isPreview && page.path === '/contact/' && (
+            <dl>
+              <div>
+                <dt>Organization</dt>
+                <dd>{siteConfig.organizationName}</dd>
+              </div>
+              <div>
+                <dt>Legal owner</dt>
+                <dd>{siteConfig.legalOwnerName}</dd>
+              </div>
+              <div>
+                <dt>Jurisdiction</dt>
+                <dd>{siteConfig.jurisdiction}</dd>
+              </div>
+            </dl>
+          )}
+          {isPreview && page.path === '/contact/' && (
+            <p>
+              This is a noindex preview. Legal identity and production email remain
+              intentionally unpublished until the owner completes production setup.
+            </p>
+          )}
+          <p>
+            <a
+              class="button secondary"
+              href={contactUrl}
+              rel={siteConfig.contactMethod === 'github' ? 'external noopener' : undefined}
+            >
+              {siteConfig.contactMethod === 'email' && !isPreview
+                ? `Email ${siteConfig.contactEmail}`
+                : 'Open a GitHub issue'}
+            </a>
+          </p>
+          <p>Do not include symptoms, assessment answers, or other personal health details.</p>
+        </section>
+      )
+    }
+    <ClaimEvidence route={page.path} />
+    <p class="funding">
+      We currently receive no commission from the products or product categories discussed.
+    </p>
+    {page.sourceIds && <SourceList ids={page.sourceIds} />}
+    <aside class="panel next">
+      <h2>Find the next useful change</h2>
+      <p>
+        Answer only the environmental questions that can change the plan. No account. No name.
+        Your answers stay in this browser.
+      </p>
+      <a class="button" href="/tool/">Find tonight’s change</a>
+    </aside>
+  </article>
+</BaseLayout>
+<style>
+  .shell {
+    max-width: 66rem;
+    padding-top: clamp(2.5rem, 7vw, 5.5rem);
+  }
+  header {
+    max-width: 52rem;
+    margin-bottom: var(--space-6);
+  }
+  header h1 {
+    font-size: clamp(2.5rem, 6vw, 4.8rem);
+  }
+  .section {
+    max-width: var(--measure);
+  }
+  .section.first {
+    margin-top: var(--space-6);
+  }
+  .link-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+    margin-block: var(--space-6);
+  }
+  .link-list a {
+    padding: 1rem;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+  }
+  .funding {
+    margin-top: var(--space-7);
+    color: var(--ink-650);
+    font-size: 0.9rem;
+  }
+  .next {
+    margin-top: var(--space-7);
+  }
+  .next h2 {
+    margin-top: 0;
+  }
+  .owner-contact dl {
+    display: grid;
+    gap: 0.8rem;
+  }
+  .owner-contact dl div {
+    display: grid;
+    grid-template-columns: minmax(8rem, 0.35fr) 1fr;
+    gap: 1rem;
+    border-top: 1px solid var(--line);
+    padding-top: 0.75rem;
+  }
+  .owner-contact dt {
+    font-weight: 740;
+  }
+  .owner-contact dd {
+    margin: 0;
+  }
+  @media (max-width: 600px) {
+    .link-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

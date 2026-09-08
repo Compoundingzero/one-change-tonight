@@ -1,0 +1,54 @@
+---
+import { siteConfig } from '@/config/site';
+---
+
+<footer>
+  <div class="wrap footer-grid">
+    <div>
+      <strong>{siteConfig.siteName}</strong>
+      <p>
+        A private, environmental comfort decision aid. Not a diagnostic or treatment service.
+      </p>
+      <p>{siteConfig.fundingDisclosure}</p>
+    </div>
+    <nav aria-label="Footer">
+      <a href="/methodology/">Methodology</a>
+      <a href="/editorial-policy/">Editorial policy</a>
+      <a href="/medical-boundaries/">Medical boundaries</a>
+      <a href="/terms/">Terms</a>
+      <a href="/corrections/">Corrections</a>
+      <a href="/contact/">Contact</a>
+      <a href="/sitemap/">Sitemap</a>
+    </nav>
+  </div>
+</footer>
+<style>
+  footer {
+    margin-top: var(--space-8);
+    border-top: 1px solid var(--line);
+    padding: var(--space-7) 0;
+    color: var(--ink-650);
+    font-size: 0.9rem;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 2rem;
+  }
+  nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem 1rem;
+  }
+  nav a {
+    color: var(--ink-800);
+  }
+  p {
+    margin: 0.45rem 0;
+  }
+  @media (max-width: 680px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

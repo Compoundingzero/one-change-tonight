@@ -1,0 +1,199 @@
+---
+import BaseLayout from '@/components/layout/BaseLayout.astro';
+import MedicalBoundary from '@/components/safety/MedicalBoundary.astro';
+import AssessmentApp from '@/components/assessment/AssessmentApp';
+---
+
+<BaseLayout
+  title="One Change Tonight"
+  description="Your room is cool and you are still waking hot. Find one private, reversible environmental change without freezing your partner or buying first."
+>
+  <section class="hero wrap">
+    <div class="hero-intro">
+      <div class="hero-copy">
+        <p class="eyebrow">A private sleep-environment tool</p>
+        <h1>Your room is cool.<br /><span>You are still waking hot.</span></h1>
+        <p class="lede">
+          Find one change for tonight—without freezing your partner or buying first.
+        </p>
+        <p class="trust">No account or name. Answers stay in this browser.</p>
+        <a href="/awake-and-hot/" class="awake-link">Hot right now? Open the night view.</a>
+      </div>
+      <MedicalBoundary />
+    </div>
+    <div class="tool-first">
+      <AssessmentApp client:load embedded startImmediately />
+    </div>
+  </section>
+
+  <section class="framework wrap" aria-labelledby="framework-heading">
+    <p class="eyebrow">Room · Bed · Body · Partner</p>
+    <h2 id="framework-heading">The same hot awakening can ask four different questions.</h2>
+    <div class="framework-grid">
+      <article>
+        <span>01</span><h3>Room</h3><p>
+          Was the whole bedroom hot, and did both sleepers feel it?
+        </p>
+      </article>
+      <article>
+        <span>02</span><h3>Bed</h3><p>
+          Did warmth build underneath or under the covers over time?
+        </p>
+      </article>
+      <article>
+        <span>03</span><h3>Body</h3><p>
+          Did heat arrive suddenly, concentrate in the upper body, or leave you cold afterwards?
+        </p>
+      </article>
+      <article>
+        <span>04</span><h3>Partner</h3><p>
+          Was the other sleeper comfortable or cold while you were hot?
+        </p>
+      </article>
+    </div>
+    <p><a href="/room-bed-body-partner/">See how the framework selects one experiment</a></p>
+  </section>
+
+  <section class="promise wrap grid two">
+    <article>
+      <p class="eyebrow">What you receive</p>
+      <h2>One useful output, not a symptom score.</h2>
+      <ul>
+        <li>A restrained environmental pattern</li><li>The clues that influenced it</li><li>
+          One reversible change
+        </li><li>What to keep constant</li><li>A private three-night check-in</li>
+      </ul>
+    </article>
+    <article class="panel">
+      <p class="eyebrow">Independent by design</p>
+      <h2>No product funnel.</h2>
+      <p>
+        We currently receive no commission from the products or product categories discussed.
+      </p>
+      <p><a href="/evidence/">See what is evidence, interpretation, and still unknown</a>.</p>
+    </article>
+  </section>
+</BaseLayout>
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(34rem, 1.08fr);
+    align-items: start;
+    gap: clamp(2rem, 5vw, 5rem);
+    padding-top: clamp(2rem, 5vw, 4.5rem);
+  }
+  .hero-copy {
+    max-width: 59rem;
+  }
+  .hero h1 span {
+    color: var(--cool-700);
+  }
+  .awake-link {
+    display: inline-block;
+    margin-top: 0.8rem;
+    font-weight: 650;
+  }
+  .hero-intro > :global(.notice) {
+    max-width: 52rem;
+    margin: 1.5rem 0 0;
+  }
+  .tool-first {
+    min-width: 0;
+  }
+  .framework,
+  .promise {
+    padding-top: var(--space-8);
+  }
+  .framework > h2 {
+    max-width: 51rem;
+    margin-top: 0.4rem;
+  }
+  .framework-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .framework-grid article {
+    background: var(--paper-raised);
+    padding: 1.25rem;
+  }
+  .framework-grid span {
+    color: var(--cool-700);
+    font:
+      750 0.78rem/1 ui-monospace,
+      monospace;
+  }
+  .framework-grid h3 {
+    margin: 2rem 0 0.5rem;
+  }
+  .framework-grid p {
+    color: var(--ink-650);
+    font-size: 0.93rem;
+  }
+  .promise > article > h2 {
+    margin-top: 0.4rem;
+  }
+  .promise .panel h2 {
+    margin-top: 0.4rem;
+  }
+  @media (max-width: 800px) {
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      padding-top: 1.5rem;
+    }
+    .framework-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 430px) {
+    .hero {
+      padding-top: 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.85rem, 8.8vw, 2.25rem);
+      line-height: 1.04;
+      margin-bottom: 0.7rem;
+    }
+    .hero .lede {
+      margin-block: 0.6rem;
+      font-size: 1rem;
+      line-height: 1.45;
+    }
+    .hero .trust {
+      margin-block: 0.65rem;
+      font-size: 0.88rem;
+      line-height: 1.4;
+    }
+    .awake-link {
+      margin-top: 0.25rem;
+      font-size: 0.88rem;
+      line-height: 1.4;
+    }
+    .hero-intro > :global(.notice) {
+      margin-top: 0.75rem;
+      padding: 0.65rem 0.8rem;
+      font-size: 0.82rem;
+      line-height: 1.42;
+    }
+    .framework-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 340px) {
+    .hero {
+      padding-top: 0.5rem;
+      gap: 0.5rem;
+    }
+    .hero-intro > :global(.notice) {
+      margin-top: 0.5rem;
+      padding: 0.5rem 0.55rem;
+      font-size: 0.76rem;
+      line-height: 1.34;
+    }
+  }
+</style>

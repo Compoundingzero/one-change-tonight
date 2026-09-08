@@ -1,0 +1,48 @@
+---
+import { sourceById } from '@/data/sources/sources';
+interface Props {
+  ids: string[];
+}
+const { ids } = Astro.props;
+const missing = ids.filter((id) => !sourceById.has(id));
+if (missing.length) throw new Error(`Unregistered source IDs: ${missing.join(', ')}`);
+const records = ids.map((id) => sourceById.get(id)!);
+---
+
+<section id="sources" class="sources">
+  <h2>Sources</h2>
+  <p>Sources are selected for the claims on this page. Accessed September 7, 2026.</p>
+  <ol>
+    {
+      records.map((source) => (
+        <li>
+          <a href={source.url} rel="external noopener">
+            {source.title}
+          </a>
+          . {source.publisher}.
+          <span>
+            Source type: {source.type}. Evidence status:{' '}
+            {source.evidenceStatus.replaceAll('_', ' ')}.{' '}
+            {source.published ? `Published ${source.published}. ` : ''}
+            {source.updated ? `Updated ${source.updated}. ` : ''}Accessed {source.accessed}.
+          </span>
+          <span>Supports: {source.supports.join('; ')}.</span>
+          {source.notes && <span>Limit: {source.notes}</span>}
+        </li>
+      ))
+    }
+  </ol>
+</section>
+<style>
+  .sources {
+    padding-top: var(--space-4);
+  }
+  li {
+    margin-bottom: 0.9rem;
+  }
+  span {
+    display: block;
+    color: var(--ink-650);
+    font-size: 0.9rem;
+  }
+</style>

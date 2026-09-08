@@ -1,0 +1,101 @@
+---
+import '@/styles/global.css';
+import SiteHeader from './SiteHeader.astro';
+import SiteFooter from './SiteFooter.astro';
+import { canonicalFor, isPreview, siteConfig } from '@/config/site';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  noindex?: boolean;
+  article?: boolean;
+  published?: string;
+  modified?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  minimal?: boolean;
+  nightDefault?: boolean;
+}
+
+const {
+  title,
+  description,
+  image = '/social-card.svg',
+  noindex = false,
+  article = false,
+  published = '2026-09-07',
+  modified = '2026-09-07',
+  jsonLd,
+  minimal = false,
+  nightDefault = false,
+} = Astro.props;
+const robots =
+  isPreview || noindex
+    ? 'noindex, nofollow, noarchive'
+    : 'index, follow, max-image-preview:large';
+const canonical = canonicalFor(Astro.url.pathname);
+const fullTitle = title === siteConfig.siteName ? title : `${title} | ${siteConfig.siteName}`;
+const pageJsonLd = jsonLd ?? {
+  '@context': 'https://schema.org',
+  '@type': article ? 'Article' : 'WebPage',
+  name: title,
+  description,
+  ...(canonical ? { url: canonical } : {}),
+  ...(article
+    ? {
+        datePublished: published,
+        dateModified: modified,
+        author: { '@type': 'Organization', name: siteConfig.organizationName },
+      }
+    : {}),
+};
+---
+
+<!doctype html>
+<html lang="en" data-theme={nightDefault ? 'night' : undefined}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f7f4ed" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content={article ? 'article' : 'website'} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta
+      property="og:image"
+      content={canonical ? new URL(image, canonical).toString() : image}
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    {
+      siteConfig.googleVerification && (
+        <meta name="google-site-verification" content={siteConfig.googleVerification} />
+      )
+    }
+    {
+      siteConfig.bingVerification && (
+        <meta name="msvalidate.01" content={siteConfig.bingVerification} />
+      )
+    }
+    <script is:inline>
+      try {
+        const stored = window.localStorage.getItem('one-change-tonight:state:v1');
+        const preference = stored ? JSON.parse(stored)?.uiPreferences?.lowBrightness : false;
+        if (preference === true) document.documentElement.dataset.theme = 'night';
+      } catch {
+        // A blocked or malformed local record must never block the static page.
+      }
+    </script>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(pageJsonLd)} />
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+    {!minimal && <SiteHeader />}
+    <main id="main" tabindex="-1"><slot /></main>
+    {!minimal && <SiteFooter />}
+  </body>
+</html>

@@ -1,0 +1,33 @@
+---
+import BaseLayout from '@/components/layout/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page Not Found"
+  description="The requested One Change Tonight page could not be found."
+  noindex
+>
+  <section class="wrap missing">
+    <p class="eyebrow">404</p>
+    <h1>That page is not here.</h1>
+    <p class="lede">
+      No personal result lives at a public URL. Return to the private tool or choose a public
+      guide.
+    </p>
+    <div>
+      <a class="button" href="/tool/">Open the private tool</a>
+      <a class="button secondary" href="/sitemap/">View the sitemap</a>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .missing {
+    min-height: 55vh;
+    padding-top: 8rem;
+  }
+  .missing div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+  }
+</style>

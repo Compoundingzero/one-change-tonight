@@ -1,0 +1,135 @@
+---
+const diagrams = [
+  {
+    file: 'room-bed-personal-heat.svg',
+    alt: 'Nested room and bed outlines with one personal heat path highlighted.',
+    caption: 'Room, bed, and personal timing are separate observations.',
+    text: 'Ask whether the room was hot, whether the bed warmed over time, and whether the heat arrived suddenly.',
+  },
+  {
+    file: 'room-bed-body-partner.svg',
+    alt: 'Four connected blocks labeled room, bed, body, and partner.',
+    caption: 'The four-part observation framework.',
+    text: 'The four observations converge on one environmental variable to test.',
+  },
+  {
+    file: 'hot-sweat-cold-sequence.svg',
+    alt: 'A line passes through sudden heat, sweating, and cold afterwards.',
+    caption: 'The sequence can guide a recovery experiment without identifying cause.',
+    text: 'Heat can be followed by moisture and cold; record each stage separately.',
+  },
+  {
+    file: 'bed-layer-stack.svg',
+    alt: 'Top cover, sleeper, sheet, protector or topper, and mattress shown as separate layers.',
+    caption: 'Change only one safely removable layer.',
+    text: 'The bed is a stack. A layer needed for hygiene, protection, or support should not be removed casually.',
+  },
+  {
+    file: 'one-sided-airflow.svg',
+    alt: 'Airflow crosses one side of a shared bed while the other side stays unchanged.',
+    caption: 'Local airflow can test one side without cooling the room further.',
+    text: 'Use an existing fan on the lowest useful setting and stop for noise, irritation, cold, or partner disturbance.',
+  },
+  {
+    file: 'separate-bedding.svg',
+    alt: 'Two separate top covers provide different insulation on one shared bed.',
+    caption: 'Separate insulation before adding powered complexity.',
+    text: 'Each sleeper uses an existing cover that fits their comfort while room conditions remain shared.',
+  },
+  {
+    file: 'room-vs-one-sided.svg',
+    alt: 'Cooling arrows across a room compared with a highlighted side of a bed.',
+    caption: 'Choose the area that matches the observation.',
+    text: 'Whole-room cooling affects both sleepers; a one-sided change targets a local constraint.',
+  },
+  {
+    file: 'passive-vs-active.svg',
+    alt: 'A passive bed layer compared with a powered circular heat-movement loop.',
+    caption: 'Passive layers and active devices do different work.',
+    text: 'Passive layers affect insulation and moisture without power. Active devices use a fan or pump and add sound and upkeep.',
+  },
+  {
+    file: 'air-vs-water.svg',
+    alt: 'Moving air lines compared with a closed fluid loop beneath a surface.',
+    caption: 'Two active-cooling mechanisms.',
+    text: 'Air acts on the space under or around covers; circulating fluid acts through a contact surface.',
+  },
+  {
+    file: 'one-change-loop.svg',
+    alt: 'A loop connects observe, change one thing, record the morning, and choose the next question.',
+    caption: 'The One Change Tonight loop.',
+    text: 'Observe, change one variable, record what happened, and use the result to choose the next environmental question.',
+  },
+];
+---
+
+<section class="diagram-gallery" aria-labelledby="diagram-heading">
+  <h2 id="diagram-heading">Visual guide</h2>
+  <p>
+    Each diagram is an original editorial explanation, not clinical validation. Complete text
+    equivalents follow each image.
+  </p>
+  <div class="diagram-grid">
+    {
+      diagrams.map((diagram) => (
+        <figure>
+          <img
+            src={`/diagrams/${diagram.file}`}
+            width="720"
+            height={
+              diagram.file === 'bed-layer-stack.svg' || diagram.file === 'one-change-loop.svg'
+                ? '340'
+                : diagram.file === 'hot-sweat-cold-sequence.svg'
+                  ? '300'
+                  : '320'
+            }
+            alt={diagram.alt}
+            loading="lazy"
+          />
+          <figcaption>
+            <>
+              <strong>{diagram.caption}</strong>
+              <span>{diagram.text}</span>
+            </>
+          </figcaption>
+        </figure>
+      ))
+    }
+  </div>
+</section>
+<style>
+  .diagram-gallery {
+    margin-top: var(--space-8);
+  }
+  .diagram-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem;
+  }
+  figure {
+    margin: 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--paper-raised);
+  }
+  img {
+    display: block;
+    width: 100%;
+    background: #fffdf8;
+  }
+  figcaption {
+    display: grid;
+    gap: 0.25rem;
+    padding: 1rem;
+  }
+  figcaption span {
+    color: var(--ink-650);
+    font-size: 0.9rem;
+  }
+  @media (max-width: 680px) {
+    .diagram-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

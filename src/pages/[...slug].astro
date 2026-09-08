@@ -1,0 +1,27 @@
+---
+import { getCollection } from 'astro:content';
+import CorePage from '@/components/content/CorePage.astro';
+import SearchArticle from '@/components/content/SearchArticle.astro';
+import { corePages } from '@/data/core-pages';
+
+export async function getStaticPaths() {
+  const collections = await Promise.all([
+    getCollection('guides'),
+    getCollection('comparisons'),
+  ]);
+  const articles = collections.flat();
+  const articlePaths = articles.map((entry) => ({
+    params: { slug: entry.data.path.replace(/^\/+|\/+$/g, '') },
+    props: { kind: 'article' as const, payload: entry.data },
+  }));
+  const corePaths = corePages.map((page) => ({
+    params: { slug: page.path.replace(/^\/+|\/+$/g, '') },
+    props: { kind: 'core' as const, payload: page },
+  }));
+  return [...articlePaths, ...corePaths];
+}
+
+const { kind, payload } = Astro.props;
+---
+
+{kind === 'article' ? <SearchArticle article={payload} /> : <CorePage page={payload} />}

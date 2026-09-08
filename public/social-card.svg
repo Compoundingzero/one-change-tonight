@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">One Change Tonight</title>
+  <desc id="desc">Four calm vertical lines with one shifted line, representing a single variable changed during a night experiment.</desc>
+  <rect width="1200" height="630" fill="#f7f4ed"/>
+  <g transform="translate(110 120)">
+    <rect x="0" y="70" width="16" height="210" rx="8" fill="#52625f"/>
+    <rect x="42" y="70" width="16" height="210" rx="8" fill="#52625f"/>
+    <rect x="84" y="0" width="16" height="280" rx="8" fill="#2a7480"/>
+    <rect x="126" y="70" width="16" height="210" rx="8" fill="#52625f"/>
+  </g>
+  <text x="330" y="282" font-family="system-ui, sans-serif" font-size="76" font-weight="650" fill="#182321">One Change Tonight</text>
+  <text x="334" y="355" font-family="system-ui, sans-serif" font-size="31" fill="#344542">Stop guessing. Change one thing. Learn from what happens.</text>
+</svg>

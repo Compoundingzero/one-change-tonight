@@ -1,0 +1,88 @@
+---
+import BaseLayout from '@/components/layout/BaseLayout.astro';
+import MedicalBoundary from '@/components/safety/MedicalBoundary.astro';
+import AssessmentApp from '@/components/assessment/AssessmentApp';
+const appSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Find tonight’s change',
+  applicationCategory: 'LifestyleApplication',
+  operatingSystem: 'Any modern web browser',
+  description:
+    'A private sleep-environment decision aid that selects one reversible comfort experiment. It is not a medical diagnostic application.',
+};
+const contextTargets = [
+  'partner-temperature',
+  'cold-room',
+  'hot-then-cold',
+  'bed-heat',
+  'failed-fix',
+  'mechanisms',
+  'care-notes',
+];
+---
+
+<BaseLayout
+  title="Find Tonight’s Change"
+  description="Answer a short, private set of environmental questions and receive one reversible comfort experiment. No diagnosis, account, or data sent to us."
+  jsonLd={appSchema}
+>
+  <div class="tool-shell wrap">
+    <header>
+      <p class="eyebrow">Find tonight’s change</p>
+      <h1>Stop guessing. Change one thing.</h1>
+      <p class="lede">
+        The tool looks at the room, bed, timing, moisture, and partner constraints. It selects
+        one small experiment and explains why.
+      </p>
+    </header>
+    <MedicalBoundary />
+    <div class="context-targets" aria-hidden="true">
+      {contextTargets.map((target) => <span id={target} />)}
+    </div>
+    <AssessmentApp client:load />
+    <section class="static-explanation">
+      <h2>What the tool examines</h2>
+      <p>
+        Whole-room heat, bed heat build-up, sudden personal heat that the room does not fully
+        explain, moisture after sweating, and whether one side of a shared bed needs a different
+        environment.
+      </p>
+      <h2>What it cannot determine</h2>
+      <p>
+        The result cannot identify menopause, another medical condition, a medicine effect, or
+        any underlying cause. Environmental cooling may affect comfort without treating the
+        reason for an episode.
+      </p>
+      <p>
+        <a href="/methodology/">Read the deterministic rule method</a> · <a href="/evidence/"
+          >Review the evidence boundary</a
+        > · <a href="/sources/">Open the source register</a>
+      </p>
+    </section>
+  </div>
+</BaseLayout>
+<style>
+  .tool-shell {
+    padding-top: clamp(2rem, 6vw, 5rem);
+  }
+  header {
+    max-width: 54rem;
+    margin-bottom: 1.5rem;
+  }
+  header h1 {
+    font-size: clamp(2.5rem, 6vw, 4.6rem);
+  }
+  .tool-shell > .notice {
+    max-width: 52rem;
+    margin: 0 auto 1rem;
+  }
+  .context-targets {
+    height: 0;
+    overflow: hidden;
+  }
+  .static-explanation {
+    max-width: 52rem;
+    margin: var(--space-8) auto 0;
+  }
+</style>

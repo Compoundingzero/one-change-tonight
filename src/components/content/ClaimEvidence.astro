@@ -1,0 +1,46 @@
+---
+import { claimsForRoute } from '@/data/claims/claims';
+interface Props {
+  route: string;
+}
+const records = claimsForRoute(Astro.props.route);
+---
+
+{
+  records.length > 0 && (
+    <section id="claim-evidence" class="claim-evidence">
+      <h2>How the key claims are classified</h2>
+      {records.map((claim) => (
+        <article>
+          <h3>{claim.claimClass.replaceAll('_', ' ')}</h3>
+          <p>{claim.statement}</p>
+          <p class="boundary">
+            <strong>Boundary:</strong> {claim.boundary}
+          </p>
+          <p class="metadata">
+            Confidence in this scoped statement: {claim.confidence}. Reviewed {claim.reviewed}.
+          </p>
+        </article>
+      ))}
+    </section>
+  )
+}
+<style>
+  .claim-evidence {
+    border-top: 1px solid var(--line);
+    margin-top: var(--space-7);
+  }
+  .claim-evidence article {
+    max-width: var(--measure);
+  }
+  .claim-evidence h3 {
+    text-transform: capitalize;
+  }
+  .boundary {
+    color: var(--ink-650);
+  }
+  .metadata {
+    color: var(--ink-650);
+    font-size: 0.9rem;
+  }
+</style>

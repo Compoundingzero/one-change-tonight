@@ -1,0 +1,12 @@
+site,mobile_390_observed,tablet_768,desktop_1440_observed,narrow_reflow,first_action_visibility,notable_risk
+Shots,"Yes; full-screen onboarding; CTA fell below captured viewport","Not independently captured","Yes; CTA centered in modal","Modal scales but hides tool","Not visible at 390 capture; visible at 1440","Gate delays task and mobile vertical fit is fragile"
+IT-Tools,"Yes; directory cards and converter","Not independently captured","Yes; persistent sidebar","Converter becomes one column; sidebar hides","Yes on converter route","Directory volume and donation CTA compete on home"
+Cleanup.pictures,"Yes; initial and completed sample","Not independently captured","Not independently captured","Strong single-column canvas","Yes","Some icon-only controls lack clear accessible names"
+Ray,"Yes","Not independently captured","Yes","Preview first; inspector moves to bottom","Editor appears after load","Long blank load moment and developer-dark aesthetic"
+Squoosh,"Yes; initial and result","Not independently captured","Yes; initial","Canvas fills view; result panels overlay bottom","Yes","Active state is dense and image-centric"
+Transform.tools,"Yes","Not independently captured","Yes","Failed: desktop directory consumed width and editor overflowed","Tool output not visible","Horizontal overflow and weak mobile hierarchy"
+readme.so,"Yes; landing and editor","Not independently captured","Yes","Editor view dominates; section/preview context becomes obscure","Landing CTA yes; editor purpose weak","Off-canvas content remained in accessibility tree"
+Excalidraw,"Yes","Not independently captured","Yes","Toolbar moves to bottom; canvas remains primary","Contextual start options visible","Infinite canvas and tiny icons unsuitable for a tired user"
+Unscreen/Canva,"Yes after redirect","Not independently captured","Not independently captured","Marketing page stacks correctly","Upload visible after cookie notice dismissed","Cookie overlay and long ecosystem content delay task"
+Carbon,"Yes","Not independently captured","Yes","Controls stack above preview","Yes; sample and editor below controls","Control density pushes output downward"
+TinyPNG,"Yes; initial only","Not independently captured","Not independently captured","Upload zone stacks well","Yes","Privacy is distant and commercial content follows immediately"
